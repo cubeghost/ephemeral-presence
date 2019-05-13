@@ -6,6 +6,7 @@ dependencies:
   express: 4.16.4
   helmet: 3.18.0
   lodash: 4.17.11
+  redis: 2.8.0
   socket.io: 2.2.0
   uuid: 3.3.2
 devDependencies:
@@ -2162,6 +2163,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
+  /double-ended-queue/2.1.0-0:
+    dev: false
+    resolution:
+      integrity: sha1-ED01J/0xUo9AGIEwyEHv3XgmTlw=
   /duplexer3/0.1.4:
     dev: true
     resolution:
@@ -4962,6 +4967,26 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==
+  /redis-commands/1.5.0:
+    dev: false
+    resolution:
+      integrity: sha512-6KxamqpZ468MeQC3bkWmCB1fp56XL64D4Kf0zJSwDZbVLLm7KFkoIcHrgRvQ+sk8dnhySs7+yBg94yIkAK7aJg==
+  /redis-parser/2.6.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+  /redis/2.8.0:
+    dependencies:
+      double-ended-queue: 2.1.0-0
+      redis-commands: 1.5.0
+      redis-parser: 2.6.0
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-M1OkonEQwtRmZv4tEWF2VgpG0JWJ8Fv1PhlgT5+B+uNq2cA3Rt1Yt/ryoR+vQNOQcIEgdCdfH0jr3bDpihAw1A==
   /redux-persist/5.10.0:
     dev: true
     peerDependencies:
@@ -6363,6 +6388,7 @@ specifiers:
   react: ^16.7.0
   react-dom: ^16.7.0
   react-redux: ^6.0.0
+  redis: ^2.8.0
   redux: ^4.0.1
   redux-persist: ^5.10.0
   redux-socket.io: ^1.4.0

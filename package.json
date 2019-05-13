@@ -69,7 +69,8 @@
     "helmet": "^3.18.0",
     "lodash": "^4.17.11",
     "socket.io": "^2.2.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "redis": "^2.8.0"
   },
   "eslintConfig": {
     "extends": "./eslintrc.js"
