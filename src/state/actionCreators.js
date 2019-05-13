@@ -1,6 +1,6 @@
 import { flow, isEmpty, trim } from 'lodash/fp';
 
-import actionTypes from 'state/actionTypes';
+import * as actionTypes from 'state/actionTypes';
 
 const isStringEmpty = flow(trim, isEmpty);
 
@@ -9,12 +9,12 @@ const isStringEmpty = flow(trim, isEmpty);
  * action creators
  */
 export const setUsername = username => ({
-  type: actionCreators.SET_USERNAME,
+  type: actionTypes.SET_USERNAME,
   data: { username },
 });
 
 export const setCursor = cursor => ({
-  type: actionCreators.SET_CURSOR,
+  type: actionTypes.SET_CURSOR,
   data: { cursor },
 });
 
@@ -22,7 +22,7 @@ export const setPosition = ({ x, y }) => (dispatch, getState) => {
   const { connection: { isIdentified } } = getState();
   if (isIdentified) {
     dispatch({
-      type: actionCreators.SET_POSITION,
+      type: actionTypes.SET_POSITION,
       data: { x, y },
     });
   } else {
@@ -31,7 +31,7 @@ export const setPosition = ({ x, y }) => (dispatch, getState) => {
 };
 
 export const setShouldPersistIdentity = shouldPersistIdentity => ({
-  type: actionCreators.SET_SHOULD_PERSIST_IDENTITY,
+  type: actionTypes.SET_SHOULD_PERSIST_IDENTITY,
   data: { shouldPersistIdentity },
 });
 
@@ -40,7 +40,7 @@ export const identify = () => (dispatch, getState) => {
   const { self: { username, cursor } } = getState();
   if (!isStringEmpty(username) && cursor) {
     dispatch({
-      type: actionCreators.IDENTIFY,
+      type: actionTypes.IDENTIFY,
       data: {
         username,
         cursor,
@@ -53,25 +53,25 @@ export const identify = () => (dispatch, getState) => {
 };
 
 export const clearIdentity = () => ({
-  type: actionCreators.CLEAR_IDENTITY,
+  type: actionTypes.CLEAR_IDENTITY,
 });
 
 export const sendMessage = message => ({
-  type: actionCreators.SEND_MESSAGE,
+  type: actionTypes.SEND_MESSAGE,
   data: { message },
 });
 
 export const setSocketId = socketId => ({
-  type: actionCreators.SET_SOCKET_ID,
+  type: actionTypes.SET_SOCKET_ID,
   data: { socketId },
 });
 
 export const socketConnect = () => ({
-  type: actionCreators.SET_IS_CONNECTED,
+  type: actionTypes.SET_IS_CONNECTED,
   data: { isConnected: true, }
 });
 
 export const socketDisconnect = () => ({
-  type: actionCreators.SET_IS_CONNECTED,
+  type: actionTypes.SET_IS_CONNECTED,
   data: { isConnected: false, }
 });

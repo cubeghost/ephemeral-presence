@@ -4,10 +4,12 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
+    "watch:client": "webpack --watch",
+    "watch:server": "nodemon --watch src/server.js --watch src/state.actions.js --exec babel-node src/server.js",
     "build:client": "webpack",
     "build:server": "babel src/server.js -d build && babel src/state/actionTypes.js -d build/state",
     "build": "npm run build:server && npm run build:client",
-    "start": "npm run build && node build/server.js"
+    "start": "npm run watch:"
   },
   "repository": {
     "type": "git",
