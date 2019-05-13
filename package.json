@@ -8,9 +8,8 @@
     "watch:server": "nodemon --watch src/server.js --watch src/state.actions.js --exec babel-node src/server.js",
     "build:client": "webpack",
     "build:server": "babel src/server.js -d build && babel src/state/actions.js -d build/state",
-    "start": "node build/server.js",
     "build": "npm run build:server && npm run build:client",
-    "heroku-postbuild": "npm run build"
+    "start": "npm run build && node build/server.js"
   },
   "repository": {
     "type": "git",
