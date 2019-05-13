@@ -7,14 +7,10 @@
   },
   "restart": {
     "exclude": [
-      "^build",
-      "^src"
+      "\\/build.*",
+      "\\/src.*"
     ],
-    "include": [
-      "\\.json",
-      "^webpack\\.config\\.js$",
-      "\\.eslintrc\\.js$"
-    ]
+    "include": []
   },
   "throttle": 100
 }

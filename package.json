@@ -8,7 +8,7 @@
     "watch:server": "nodemon --watch src/server.js --watch src/state.actions.js --exec babel-node src/server.js",
     "build:client": "webpack",
     "build:server": "babel src/server.js -d build && babel src/state/actionTypes.js -d build/state",
-    "build": "npm run build:server && npm run build:client",
+    "build": "npm run build:client && npm run build:server",
     "start": "npm-run-all watch:*"
   },
   "repository": {

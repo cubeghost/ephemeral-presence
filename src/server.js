@@ -7,9 +7,6 @@ const debugModule = require('debug');
 
 const actionTypes = require('./state/actionTypes');
 
-// console.log(process.env.DEBUG)
-// console.log(debugModule.names)
-
 const app = express();
 /* eslint-disable new-cap */
 const server = require('http').Server(app);
