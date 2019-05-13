@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { identify, setUsername, setShouldPersistIdentity } from 'state/actions';
+import { identify, setUsername, setShouldPersistIdentity } from 'state/actionCreators';
 
 import CursorPicker from 'components/CursorPicker';
 

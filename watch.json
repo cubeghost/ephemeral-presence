@@ -6,7 +6,10 @@
     ]
   },
   "restart": {
-    "exclude": [],
+    "exclude": [
+      "^build",
+      "^src"
+    ],
     "include": [
       "\\.json",
       "^webpack\\.config\\.js$",

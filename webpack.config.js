@@ -82,9 +82,9 @@ const config = {
       },
     }),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
-    new SimpleProgressWebpackPlugin({
-      format: 'compact',
-    }),
+    // new SimpleProgressWebpackPlugin({
+    //   format: 'compact',
+    // }),
     new FriendlyErrorsWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
     new WebpackCleanPlugin([`${paths.appBuild}/client.*.js`]),
