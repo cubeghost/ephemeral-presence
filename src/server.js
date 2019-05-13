@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const debugModule = require('debug');
 
-const actionTypes = require('./state/actions');
+const actionTypes = require('./state/actionTypes');
 
 // console.log(process.env.DEBUG)
 // console.log(debugModule.names)
