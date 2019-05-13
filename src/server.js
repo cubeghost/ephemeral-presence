@@ -2,6 +2,7 @@ require('dotenv').config({ debug: true });
 
 const path = require('path');
 const express = require('express');
+const redis = require('redis');
 const bodyParser = require('body-parser');
 const debugModule = require('debug');
 
@@ -20,6 +21,10 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.sendFile(path.join(buildDir, '/index.html'));
 });
+
+const redisClient = redis.createClient(process.env.REDIS_URL);
+const USER_EXPIRY = 60 * 60 * 24;
+const MESSAGE_EXPIRY = 60 * 60;
 
 const ACTION = 'action';
 
