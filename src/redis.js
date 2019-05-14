@@ -7,10 +7,13 @@ const redisClient = redis.createClient(process.env.REDIS_URL);
 
 export class MessageClient {
   constructor() {
+    this.prefix = 'message:';
     this.client = redisClient;
   }
   
+  push(message) {
   
+  }
 };
 
 export class UserClient {
