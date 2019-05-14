@@ -59,7 +59,7 @@ export class UserClient {
     accumulator = accumulator.concat(response[1]);
     
     if (cursor == '0') {
-      return accumulator;
+      return await this.client.mgetAsync(accumulator);
     } else {
       return await this.scan(cursor, accumulator);
     }
