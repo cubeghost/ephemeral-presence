@@ -50,37 +50,41 @@ const messageClient = new MessageClient();
       });
 
       socket.on(ACTION, async ({ type, data }) => {
+        const user = await userClient.get(socket.id);
+
         switch (type) {
           case actionTypes.IDENTIFY:
             const { username, cursor } = data;
             
-            const user = {
+            const newUser = {
               id: socket.id,
               username: username,
               cursor: cursor,
               position: null,
             };
-            await userClient.add(user)
-            console.log(await userClient.list())
-            users[socket.id] = users;
+            await userClient.set(newUser);
+            // users[socket.id] = users;
 
             debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
 
             io.emit(ACTION, { 
               type: actionTypes.UPDATE_USERS, 
-              data: { users } 
+              data: { users: userClient.list() } 
             });
             break;
 
           case actionTypes.SET_POSITION:
-            if (!users[socket.id]) return;
+            const updateUser = await userClient.get(socket.id);
+            if (!updateUser) return;
 
             const { x, y } = data;
-            users[socket.id].position = { x, y };
+            updateUser.position = { x, y };
+            
+            await userClient.set(updateUser);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_USERS,
-              data: { users }
+              data: { users: await userClient.list() }
             });
             break;
 
