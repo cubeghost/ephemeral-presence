@@ -5,9 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "watch:client": "webpack --watch",
-    "watch:server": "nodemon --watch src/server.js --watch src/state.actions.js --exec babel-node src/server.js",
+    "watch:server": "nodemon --watch src/server/*.js --watch src/state.actions.js --exec babel-node src/server/index.js",
     "build:client": "webpack",
-    "build:server": "babel src/server.js -d build && babel src/state/actionTypes.js -d build/state",
+    "build:server": "babel src/server/*.js -d build && babel src/state/actionTypes.js -d build/state",
     "build": "npm run build:client && npm run build:server",
     "start": "npm-run-all -p watch:client watch:server"
   },

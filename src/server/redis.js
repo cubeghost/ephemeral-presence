@@ -2,6 +2,7 @@ const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');
 const debug = require('debug')('presence:redis');
+const { promisify } = require('util');
 
 promisifyAll(redis.RedisClient.prototype);
 promisifyAll(redis.Multi.prototype);
@@ -18,13 +19,13 @@ export class MessageClient {
   }
   
   async list() {
-    const list = await this.client.lrange(this.key, 0, 100);
-    debug('list', list);
+    const list = await this.client.lrangeAsync(this.key, 0, 100);
+    debug('list', list.length);
     return list || [];
   }
   
   async push(message) {
-    let index = await this.client.rpush(
+    let index = await this.client.rpushAsync(
       this.key,
       serialize(message)
     );
