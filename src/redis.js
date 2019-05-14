@@ -1,5 +1,5 @@
-const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
+const redis = promisifyAll(require('redis'));
 const serialize = require('serialize-javascript');
 
 const USER_EXPIRY = 60 * 60 * 24;
@@ -13,8 +13,15 @@ export class MessageClient {
     this.client = redisClient;
   }
   
-  push(message) {
-    
+  async list() {
+    return this.client.lrange(this.key, 0, 100);
+  }
+  
+  async push(message) {
+    return await this.client.rpush(
+      this.key,
+      serialize(message)
+    );
   }
 };
 
