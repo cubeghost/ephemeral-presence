@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
-const actionTypes = require('./state/actionTypes');
+const actionTypes = require('../state/actionTypes');
 
 const app = express();
 /* eslint-disable new-cap */
@@ -19,7 +19,7 @@ app.use(express.static(buildDir));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(buildDir, '/index.html'));
+  res.sendFile(path.join(buildDir, '../index.html'));
 });
 
 const ACTION = 'action';

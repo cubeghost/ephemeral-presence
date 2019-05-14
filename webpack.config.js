@@ -87,7 +87,7 @@ const config = {
     // }),
     new FriendlyErrorsWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
-    new WebpackCleanPlugin([`${paths.appBuild}/client.*.js`]),
+    // new WebpackCleanPlugin([`${paths.appBuild}/client.*.js`]),
   ]
 };
 

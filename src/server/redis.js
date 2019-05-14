@@ -19,23 +19,29 @@ export class MessageClient {
   }
   
   async list() {
-    const list = await this.client.lrangeAsync(this.key, 0, 100);
-    debug('list', list.length);
-    return list || [];
+    const list = await this.client.lrangeAsync(this.key, 0, 100) || [];
+    return list.map(message => JSON.parse(message));
   }
   
   async push(message) {
-    let index = await this.client.rpushAsync(
+    return await this.client.rpushAsync(
       this.key,
       serialize(message)
     );
-    debug('push', index)
-    return
   }
 };
 
 export class UserClient {
   constructor() {
+    this.prefix = 'user';
     this.client = redisClient;
   }
+  
+  async list() {
+  
+  }
+  
+  async add() {}
+  
+  async remove() {}
 }
