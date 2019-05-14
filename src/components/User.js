@@ -15,8 +15,8 @@ const User = ({
     <div style={getPositionStyle(position)}>
       <img src={CURSORS[cursor].file} />
       <span style={{ marginLeft: '0.25em' }}>{username}</span>
-      {!!typing && (
-        <span>"{typing}"</span>
+      {(typing !== null) && (
+        <span>&nbsp;is typing "{typing}"</span>
       )}
     </div>
   );

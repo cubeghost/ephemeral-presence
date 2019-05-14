@@ -100,6 +100,7 @@ class Client extends Component {
               username={user.username} 
               position={user.position} 
               cursor={user.cursor} 
+              typing={user.typing} 
               key={user.id} 
             />
           );

@@ -45,10 +45,13 @@ class Self extends Component {
   }
 
   handleClick() {
-    const { isIdentified, isConnected } = this.props;
+    const { isIdentified, isConnected, dispatchSetTyping } = this.props;
     const { isInputEnabled } = this.state;
 
     if (isIdentified && isConnected) {
+      if (isInputEnabled) {
+        dispatchSetTyping(null);
+      }
       this.setState({ isInputEnabled: !isInputEnabled });
     }
   }
