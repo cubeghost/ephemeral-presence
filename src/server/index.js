@@ -32,6 +32,7 @@ const messageClient = new MessageClient();
   try {
   
     const users = {}; // TODO how to clean up????
+    console.log(await userClient.list())
     const messages = await messageClient.list();
 
     io.on('connection', async socket => {

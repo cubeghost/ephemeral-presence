@@ -39,7 +39,7 @@ export class UserClient {
   }
   
   async list() {
-    return this.client.hscanAsync('');
+    return this.client.scanAsync('0', 'MATCH', `${this.prefix}:`, 'COUNT', '20');
   }
   
   async add(user) {
