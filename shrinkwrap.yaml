@@ -6,7 +6,9 @@ dependencies:
   express: 4.16.4
   helmet: 3.18.0
   lodash: 4.17.11
+  pify: 4.0.1
   redis: 2.8.0
+  serialize-javascript: 1.7.0
   socket.io: 2.2.0
   uuid: 3.3.2
 devDependencies:
@@ -4628,7 +4630,6 @@ packages:
     resolution:
       integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
   /pify/4.0.1:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -5305,7 +5306,6 @@ packages:
     resolution:
       integrity: sha1-ULZ51WNc34Rme9yOWa9OW4HV9go=
   /serialize-javascript/1.7.0:
-    dev: true
     resolution:
       integrity: sha512-ke8UG8ulpFOxO8f8gRYabHQe/ZntKlcig2Mp+8+URDP1D8vJZ0KUt7LYo07q25Z/+JVSgpr/cui9PIp5H6/+nA==
   /serve-static/1.13.2:
@@ -6385,6 +6385,7 @@ specifiers:
   lodash: ^4.17.11
   nodemon: ^1.19.0
   npm-run-all: ^4.1.5
+  pify: ^4.0.1
   react: ^16.7.0
   react-dom: ^16.7.0
   react-redux: ^6.0.0
@@ -6393,6 +6394,7 @@ specifiers:
   redux-persist: ^5.10.0
   redux-socket.io: ^1.4.0
   redux-thunk: ^2.3.0
+  serialize-javascript: ^1.7.0
   simple-progress-webpack-plugin: ^1.1.2
   socket.io: ^2.2.0
   socket.io-client: ^2.2.0
