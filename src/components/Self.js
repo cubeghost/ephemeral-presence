@@ -54,10 +54,22 @@ class Self extends Component {
   }
 
   handleInput(event) {
-    this.setState({
-      message: event.target.value,
-    });
+    const { dispatchSetTyping } = this.props;
+    const message = event.target.value;
     
+    this.setState({ message });
+    dispatchSetTyping(message);
+  }
+  
+  reset() {
+    const { dispatchSetTyping } = this.props;
+    
+    dispatchSetTyping(null);
+    
+    this.setState({
+      isInputEnabled: false,
+      message: ''
+    });
   }
 
   sendMessage(event) {
@@ -66,17 +78,11 @@ class Self extends Component {
     const { dispatchSendMessage } = this.props;
     const { message } = this.state;
 
-    const resetState = {
-      isInputEnabled: false,
-      message: ''
-    };
-
     if (!isStringEmpty(message)) {
       dispatchSendMessage(message);
-      this.setState(resetState);
-    } else {
-      this.setState(resetState);
     }
+    
+    this.reset();
   }
 
   render() {

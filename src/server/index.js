@@ -53,6 +53,7 @@ io.on('connection', async socket => {
           username: username,
           cursor: cursor,
           position: null,
+          typing: null,
         };
         await userClient.set(newUser);
 
@@ -69,6 +70,20 @@ io.on('connection', async socket => {
 
         const { x, y } = data;
         user.position = { x, y };
+
+        await userClient.set(user);
+
+        io.emit(ACTION, {
+          type: actionTypes.UPDATE_USERS,
+          data: { users: await userClient.list() }
+        });
+        break;
+
+      case actionTypes.SET_TYPING:
+        if (!user) return;
+
+        const { typing } = data;
+        user.typing = typing;
 
         await userClient.set(user);
 
