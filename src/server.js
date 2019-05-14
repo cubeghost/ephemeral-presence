@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const debugModule = require('debug');
 
+const { MessageClient, UserClient } = require('./redis');
 const actionTypes = require('./state/actionTypes');
 
 const app = express();

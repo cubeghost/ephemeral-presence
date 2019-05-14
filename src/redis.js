@@ -5,6 +5,16 @@ const MESSAGE_EXPIRY = 60 * 60;
 
 const redisClient = redis.createClient(process.env.REDIS_URL);
 
-export function getMessages() {
+export class MessageClient {
+  constructor() {
+    this.client = redisClient;
+  }
   
+  
+};
+
+export class UserClient {
+  constructor() {
+    this.client = redisClient;
+  }
 }
