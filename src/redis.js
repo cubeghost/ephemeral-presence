@@ -1,5 +1,5 @@
 const redis = require('redis');
-const pify = require('pify');
+const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');
 
 const USER_EXPIRY = 60 * 60 * 24;
