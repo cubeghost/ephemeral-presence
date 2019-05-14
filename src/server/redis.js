@@ -12,7 +12,6 @@ const USER_EXPIRY = 60 * 60 * 24;
 const MESSAGE_EXPIRY = 60 * 60;
 
 const redisClient = redis.createClient(process.env.REDIS_URL);
-redisClient.flushallAsync()
 
 /*
   normally doing json in redis this way (stringifying and parsing
@@ -29,7 +28,7 @@ export class MessageClient {
   
   async list() {
     const list = await this.client.lrangeAsync(this.key, 0, 100) || [];
-    return list.map(message => JSON.parse(message));
+    return list.map(JSON.parse(message));
   }
   
   async push(message) {
@@ -66,7 +65,8 @@ export class UserClient {
   }
   
   async list() {
-    return await this.scan();
+    const list = await this.scan();
+    return list.map(JSON.parse)
   }
   
   async set(user) {

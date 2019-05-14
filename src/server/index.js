@@ -133,7 +133,7 @@ const messageClient = new MessageClient();
     });
 
   } catch (e) {
-    // console.error(e);
+    console.error(e);
     process.exit();
   }
 
