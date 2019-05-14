@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { flow, isEmpty, trim } from 'lodash/fp';
 
-import { sendMessage } from 'state/actionCreators';
+import { sendMessage, setTyping } from 'state/actionCreators';
 
 import { CURSORS } from 'consts';
 import { getPositionStyle } from 'utils';
@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  dispatchSetTyping: message => dispatch(setTyping(message)),
   dispatchSendMessage: message => dispatch(sendMessage(message)),
 });
 
@@ -56,6 +57,7 @@ class Self extends Component {
     this.setState({
       message: event.target.value,
     });
+    
   }
 
   sendMessage(event) {
