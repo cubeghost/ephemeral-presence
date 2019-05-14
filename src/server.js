@@ -48,7 +48,7 @@ const messageClient = new MessageClient();
         data: { messages }
       });
 
-      socket.on(ACTION, ({ type, data }) => {
+      socket.on(ACTION, async ({ type, data }) => {
         switch (type) {
           case actionTypes.IDENTIFY:
             const { username, cursor } = data;
@@ -83,18 +83,19 @@ const messageClient = new MessageClient();
           case actionTypes.SEND_MESSAGE:
             if (!users[socket.id]) return;
             
-            messageClient.push({
+            await messageClient.push({
               user: socket.id,
               username: users[socket.id].username,
               body: data.message,
               sentAt: Math.floor(new Date() / 1000),
             });
+            console.log(await messageClient.list())
 
             debug(`${users[socket.id].username} said: "${data.message}"`);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_MESSAGES,
-              data: { messages }
+              data: { messages: await messageClient.list() }
             });
             break;
           case actionTypes.CLEAR_IDENTITY:

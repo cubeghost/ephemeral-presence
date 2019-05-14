@@ -1,6 +1,9 @@
+const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
-const redis = promisifyAll(require('redis'));
 const serialize = require('serialize-javascript');
+
+promisifyAll(redis.RedisClient.prototype);
+promisifyAll(redis.Multi.prototype);
 
 const USER_EXPIRY = 60 * 60 * 24;
 const MESSAGE_EXPIRY = 60 * 60;
@@ -15,6 +18,7 @@ export class MessageClient {
   
   async list() {
     const list = await this.client.lrange(this.key, 0, 100);
+    console.log(list);
     return list || [];
   }
   
