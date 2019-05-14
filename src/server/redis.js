@@ -13,6 +13,13 @@ const MESSAGE_EXPIRY = 60 * 60;
 
 const redisClient = redis.createClient(process.env.REDIS_URL);
 
+/*
+  normally doing json in redis this way (stringifying and parsing
+  on the client, as opposed to ReJSON) isn't ideal, but it's ok 
+  for now because we only expect to have one server connecting 
+  to redis
+*/
+
 export class MessageClient {
   constructor() {
     this.key = 'messages';
@@ -38,17 +45,22 @@ export class UserClient {
     this.client = redisClient;
   }
   
+  getKey(id) {
+    return `${this.prefix}:${id}`;
+  }
+  
   async list() {
-    return this.client.scanAsync('0', 'MATCH', `${this.prefix}:`, 'COUNT', '20');
+    return await this.client.scanAsync('0', 'MATCH', `${this.prefix}:`, 'COUNT', '20');
   }
   
   async add(user) {
-    const hashArgs = _.flow(_.toPairs, _.flatten)(user);
-    return this.client.hmsetAsync(
-      `${this.prefix}:${user.id}`,
-      hashArgs
+    return await this.client.setAsync(
+      this.getKey(user.id),
+      serialize(user)
     );
   }
   
-  async remove() {}
+  async remove(id) {
+    return await this.client.delAsync(this.getKey(id));
+  }
 }
