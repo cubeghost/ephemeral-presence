@@ -32,9 +32,8 @@ const messageClient = new MessageClient();
   
     const users = {}; // TODO how to clean up????
     const messages = await messageClient.list();
-    console.log(messages)
 
-    io.on('connection', socket => {
+    io.on('connection', async socket => {
       const debug = debugModule('presence:user');
 
       debug(`a user connected ${socket.id}`);
@@ -45,7 +44,7 @@ const messageClient = new MessageClient();
       });
       socket.emit(ACTION, {
         type: actionTypes.UPDATE_MESSAGES,
-        data: { messages }
+        data: { messages: await messageClient.list() }
       });
 
       socket.on(ACTION, async ({ type, data }) => {
@@ -89,7 +88,6 @@ const messageClient = new MessageClient();
               body: data.message,
               sentAt: Math.floor(new Date() / 1000),
             });
-            console.log(await messageClient.list())
 
             debug(`${users[socket.id].username} said: "${data.message}"`);
 
