@@ -139,6 +139,8 @@ io.on('connection', async socket => {
   });
 });
 
+console.log(io.sockets.clients())
+
 server.listen(process.env.PORT, () => {
   const debug = debugModule('presence:server');
   debug(`http://localhost:${process.env.PORT}/`);
