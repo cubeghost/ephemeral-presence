@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');
@@ -38,10 +39,16 @@ export class UserClient {
   }
   
   async list() {
-  
+    return this.client.hscanAsync('');
   }
   
-  async add() {}
+  async add(user) {
+    const hashArgs = _.flow(_.toPairs, _.flatten)(user);
+    return this.client.hmsetAsync(
+      `${this.prefix}:${user.id}`,
+      hashArgs
+    );
+  }
   
   async remove() {}
 }

@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 
 const ACTION = 'action';
 
+const userClient = new UserClient();
 const messageClient = new MessageClient();
 
 (async () => {
@@ -51,13 +52,15 @@ const messageClient = new MessageClient();
         switch (type) {
           case actionTypes.IDENTIFY:
             const { username, cursor } = data;
-
-            users[socket.id] = {
+            
+            const user = {
               id: socket.id,
               username: username,
               cursor: cursor,
               position: null,
             };
+            userClient.add(user)
+            users[socket.id] = users;
 
             debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
 
