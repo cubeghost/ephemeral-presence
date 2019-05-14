@@ -60,7 +60,8 @@ const messageClient = new MessageClient();
               cursor: cursor,
               position: null,
             };
-            userClient.add(user)
+            await userClient.add(user)
+            console.log(await userClient.list())
             users[socket.id] = users;
 
             debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
