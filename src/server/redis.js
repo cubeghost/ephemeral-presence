@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');

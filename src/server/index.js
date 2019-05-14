@@ -3,6 +3,8 @@ require('dotenv').config({ debug: true });
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const { map } = require('lodash');
+const { flow } = require('lodash/fp');
 const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
@@ -139,7 +141,17 @@ io.on('connection', async socket => {
   });
 });
 
-console.log(io.sockets.clients())
+setInterval(async () => {
+  const debug = debugModule('presence:socket');
+  
+  const currentSockets = Object.keys(io.sockets.sockets);
+  const users = await userClient.list();
+  const userIds = users.map(user => user.id);
+  
+  debug('sockets', currentSockets)
+  debug('users', userIds)
+  debug('diff', )
+}, 1000 * 20);
 
 server.listen(process.env.PORT, () => {
   const debug = debugModule('presence:server');
