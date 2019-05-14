@@ -27,117 +27,102 @@ const ACTION = 'action';
 const userClient = new UserClient();
 const messageClient = new MessageClient();
 
-(async () => {
+io.on('connection', async socket => {
+  const debug = debugModule('presence:user');
 
-  try {
-  
-    const users = {}; // TODO how to clean up????
-    console.log(await userClient.list())
-    const messages = await messageClient.list();
+  debug(`a user connected ${socket.id}`);
 
-    io.on('connection', async socket => {
-      const debug = debugModule('presence:user');
+  socket.emit(ACTION, {
+    type: actionTypes.UPDATE_USERS,
+    data: { users: await userClient.list() }
+  });
+  socket.emit(ACTION, {
+    type: actionTypes.UPDATE_MESSAGES,
+    data: { messages: await messageClient.list() }
+  });
 
-      debug(`a user connected ${socket.id}`);
+  socket.on(ACTION, async ({ type, data }) => {
+    const user = await userClient.get(socket.id);
 
-      socket.emit(ACTION, {
-        type: actionTypes.UPDATE_USERS,
-        data: { users }
-      });
-      socket.emit(ACTION, {
-        type: actionTypes.UPDATE_MESSAGES,
-        data: { messages: await messageClient.list() }
-      });
+    switch (type) {
+      case actionTypes.IDENTIFY:
+        const { username, cursor } = data;
 
-      socket.on(ACTION, async ({ type, data }) => {
-        const user = await userClient.get(socket.id);
+        const newUser = {
+          id: socket.id,
+          username: username,
+          cursor: cursor,
+          position: null,
+        };
+        await userClient.set(newUser);
 
-        switch (type) {
-          case actionTypes.IDENTIFY:
-            const { username, cursor } = data;
-            
-            const newUser = {
-              id: socket.id,
-              username: username,
-              cursor: cursor,
-              position: null,
-            };
-            await userClient.set(newUser);
+        debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
 
-            debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
+        io.emit(ACTION, { 
+          type: actionTypes.UPDATE_USERS, 
+          data: { users: userClient.list() } 
+        });
+        break;
 
-            io.emit(ACTION, { 
-              type: actionTypes.UPDATE_USERS, 
-              data: { users: userClient.list() } 
-            });
-            break;
+      case actionTypes.SET_POSITION:
+        if (!user) return;
 
-          case actionTypes.SET_POSITION:
-            if (!user) return;
+        const { x, y } = data;
+        user.position = { x, y };
 
-            const { x, y } = data;
-            user.position = { x, y };
-            
-            await userClient.set(user);
-
-            io.emit(ACTION, {
-              type: actionTypes.UPDATE_USERS,
-              data: { users: await userClient.list() }
-            });
-            break;
-
-          case actionTypes.SEND_MESSAGE:
-            if (!user) return;
-            
-            await messageClient.push({
-              user: socket.id,
-              username: user.username,
-              body: data.message,
-              sentAt: Math.floor(new Date() / 1000),
-            });
-
-            debug(`${user.username} said: "${data.message}"`);
-
-            io.emit(ACTION, {
-              type: actionTypes.UPDATE_MESSAGES,
-              data: { messages: await messageClient.list() }
-            });
-            break;
-          case actionTypes.CLEAR_IDENTITY:
-            if (!user) return;
-
-            await userClient.remove(user.id);
-
-            debug(`user ${socket.id} cleared identity`);
-
-            io.emit(ACTION, {
-              type: actionTypes.UPDATE_USERS,
-              data: { users: await userClient.list() }
-            });
-            break;
-          default:
-            break;
-        }
-      });
-
-      socket.on('disconnect', async () => {
-        await userClient.remove(socket.id);
-
-        debug(`user ${socket.id} disconnected`);
+        await userClient.set(user);
 
         io.emit(ACTION, {
           type: actionTypes.UPDATE_USERS,
-          data: { users: userClient.list() }
+          data: { users: await userClient.list() }
         });
-      });
+        break;
+
+      case actionTypes.SEND_MESSAGE:
+        if (!user) return;
+
+        await messageClient.push({
+          user: socket.id,
+          username: user.username,
+          body: data.message,
+          sentAt: Math.floor(new Date() / 1000),
+        });
+
+        debug(`${user.username} said: "${data.message}"`);
+
+        io.emit(ACTION, {
+          type: actionTypes.UPDATE_MESSAGES,
+          data: { messages: await messageClient.list() }
+        });
+        break;
+      case actionTypes.CLEAR_IDENTITY:
+        if (!user) return;
+
+        await userClient.remove(user.id);
+
+        debug(`user ${socket.id} cleared identity`);
+
+        io.emit(ACTION, {
+          type: actionTypes.UPDATE_USERS,
+          data: { users: await userClient.list() }
+        });
+        break;
+      default:
+        break;
+    }
+  });
+
+  socket.on('disconnect', async () => {
+    await userClient.remove(socket.id);
+
+    debug(`user ${socket.id} disconnected`);
+
+    io.emit(ACTION, {
+      type: actionTypes.UPDATE_USERS,
+      data: { users: await userClient.list() }
     });
-
-  } catch (e) {
-    console.error(e);
-    process.exit();
-  }
-
-})();
+  });
+});
 
 server.listen(process.env.PORT, () => {
   const debug = debugModule('presence:server');

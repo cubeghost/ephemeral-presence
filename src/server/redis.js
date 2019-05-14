@@ -28,7 +28,7 @@ export class MessageClient {
   
   async list() {
     const list = await this.client.lrangeAsync(this.key, 0, 100) || [];
-    return list.map(JSON.parse(message));
+    return list.map(JSON.parse);
   }
   
   async push(message) {
