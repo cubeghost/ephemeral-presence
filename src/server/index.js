@@ -63,7 +63,6 @@ const messageClient = new MessageClient();
               position: null,
             };
             await userClient.set(newUser);
-            // users[socket.id] = users;
 
             debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
 
@@ -74,13 +73,12 @@ const messageClient = new MessageClient();
             break;
 
           case actionTypes.SET_POSITION:
-            const updateUser = await userClient.get(socket.id);
-            if (!updateUser) return;
+            if (!user) return;
 
             const { x, y } = data;
-            updateUser.position = { x, y };
+            user.position = { x, y };
             
-            await userClient.set(updateUser);
+            await userClient.set(user);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_USERS,
@@ -89,16 +87,16 @@ const messageClient = new MessageClient();
             break;
 
           case actionTypes.SEND_MESSAGE:
-            if (!users[socket.id]) return;
+            if (!user) return;
             
             await messageClient.push({
               user: socket.id,
-              username: users[socket.id].username,
+              username: user.username,
               body: data.message,
               sentAt: Math.floor(new Date() / 1000),
             });
 
-            debug(`${users[socket.id].username} said: "${data.message}"`);
+            debug(`${user.username} said: "${data.message}"`);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_MESSAGES,
@@ -106,15 +104,15 @@ const messageClient = new MessageClient();
             });
             break;
           case actionTypes.CLEAR_IDENTITY:
-            if (!users[socket.id]) return;
+            if (!user) return;
 
-            delete users[socket.id];
+            await userClient.remove(user.id);
 
             debug(`user ${socket.id} cleared identity`);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_USERS,
-              data: { users }
+              data: { users: await userClient.list() }
             });
             break;
           default:
@@ -122,14 +120,14 @@ const messageClient = new MessageClient();
         }
       });
 
-      socket.on('disconnect', () => {
-        delete users[socket.id];
+      socket.on('disconnect', async () => {
+        await userClient.remove(socket.id);
 
         debug(`user ${socket.id} disconnected`);
 
         io.emit(ACTION, {
           type: actionTypes.UPDATE_USERS,
-          data: { users }
+          data: { users: userClient.list() }
         });
       });
     });
