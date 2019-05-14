@@ -8,119 +8,133 @@ const debugModule = require('debug');
 const { MessageClient, UserClient } = require('./redis');
 const actionTypes = require('./state/actionTypes');
 
-const app = express();
-/* eslint-disable new-cap */
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+(async () => {
 
-const buildDir = path.resolve('build');
+  try {
+  
+    const app = express();
+    /* eslint-disable new-cap */
+    const server = require('http').Server(app);
+    const io = require('socket.io')(server);
 
-app.use(express.static(buildDir));
-app.use(bodyParser.json());
+    const buildDir = path.resolve('build');
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(buildDir, '/index.html'));
-});
+    app.use(express.static(buildDir));
+    app.use(bodyParser.json());
 
-const ACTION = 'action';
+    app.get('/', (req, res) => {
+      res.sendFile(path.join(buildDir, '/index.html'));
+    });
 
-const users = {}; // TODO how to clean up????
-const messages = [];
+    const ACTION = 'action';
+    
+    const messageClient = new MessageClient();
 
-io.on('connection', socket => {
-  const debug = debugModule('presence:user');
+    const users = {}; // TODO how to clean up????
+    const messages = await messageClient.list();
+    console.log(messages)
 
-  debug(`a user connected ${socket.id}`);
+    io.on('connection', socket => {
+      const debug = debugModule('presence:user');
 
-  socket.emit(ACTION, {
-    type: actionTypes.UPDATE_USERS,
-    data: { users }
-  });
-  socket.emit(ACTION, {
-    type: actionTypes.UPDATE_MESSAGES,
-    data: { messages }
-  });
+      debug(`a user connected ${socket.id}`);
 
-  socket.on(ACTION, ({ type, data }) => {
-    switch (type) {
-      case actionTypes.IDENTIFY:
-        const { username, cursor } = data;
+      socket.emit(ACTION, {
+        type: actionTypes.UPDATE_USERS,
+        data: { users }
+      });
+      socket.emit(ACTION, {
+        type: actionTypes.UPDATE_MESSAGES,
+        data: { messages }
+      });
 
-        users[socket.id] = {
-          id: socket.id,
-          username: username,
-          cursor: cursor,
-          position: null,
-        };
-        
-        debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
+      socket.on(ACTION, ({ type, data }) => {
+        switch (type) {
+          case actionTypes.IDENTIFY:
+            const { username, cursor } = data;
 
-        io.emit(ACTION, { 
-          type: actionTypes.UPDATE_USERS, 
-          data: { users } 
-        });
-        break;
+            users[socket.id] = {
+              id: socket.id,
+              username: username,
+              cursor: cursor,
+              position: null,
+            };
 
-      case actionTypes.SET_POSITION:
-        if (!users[socket.id]) return;
+            debug(`user ${socket.id} set username to "${username}" and cursor to "${cursor}"`);
 
-        const { x, y } = data;
-        users[socket.id].position = { x, y };
+            io.emit(ACTION, { 
+              type: actionTypes.UPDATE_USERS, 
+              data: { users } 
+            });
+            break;
 
-        io.emit(ACTION, {
-          type: actionTypes.UPDATE_USERS,
-          data: { users }
-        });
-        break;
+          case actionTypes.SET_POSITION:
+            if (!users[socket.id]) return;
 
-      case actionTypes.SEND_MESSAGE:
-        if (!users[socket.id]) return;
+            const { x, y } = data;
+            users[socket.id].position = { x, y };
 
-        const { message } = data;
-        messages.push({
-          user: socket.id,
-          username: users[socket.id].username,
-          body: message,
-          sentAt: Math.floor(new Date() / 1000),
-        });
+            io.emit(ACTION, {
+              type: actionTypes.UPDATE_USERS,
+              data: { users }
+            });
+            break;
 
-        debug(`${users[socket.id].username} said: "${message}"`);
+          case actionTypes.SEND_MESSAGE:
+            if (!users[socket.id]) return;
 
-        io.emit(ACTION, {
-          type: actionTypes.UPDATE_MESSAGES,
-          data: { messages }
-        });
-        break;
-      case actionTypes.CLEAR_IDENTITY:
-        if (!users[socket.id]) return;
+            const { message } = data;
+            messages.push({
+              user: socket.id,
+              username: users[socket.id].username,
+              body: message,
+              sentAt: Math.floor(new Date() / 1000),
+            });
 
+            debug(`${users[socket.id].username} said: "${message}"`);
+
+            io.emit(ACTION, {
+              type: actionTypes.UPDATE_MESSAGES,
+              data: { messages }
+            });
+            break;
+          case actionTypes.CLEAR_IDENTITY:
+            if (!users[socket.id]) return;
+
+            delete users[socket.id];
+
+            debug(`user ${socket.id} cleared identity`);
+
+            io.emit(ACTION, {
+              type: actionTypes.UPDATE_USERS,
+              data: { users }
+            });
+            break;
+          default:
+            break;
+        }
+      });
+
+      socket.on('disconnect', () => {
         delete users[socket.id];
 
-        debug(`user ${socket.id} cleared identity`);
+        debug(`user ${socket.id} disconnected`);
 
         io.emit(ACTION, {
           type: actionTypes.UPDATE_USERS,
           data: { users }
         });
-        break;
-      default:
-        break;
-    }
-  });
-
-  socket.on('disconnect', () => {
-    delete users[socket.id];
-
-    debug(`user ${socket.id} disconnected`);
-
-    io.emit(ACTION, {
-      type: actionTypes.UPDATE_USERS,
-      data: { users }
+      });
     });
-  });
-});
 
-server.listen(process.env.PORT, () => {
-  const debug = debugModule('presence:server');
-  debug(`http://localhost:${process.env.PORT}/`);
-});
+    server.listen(process.env.PORT, () => {
+      const debug = debugModule('presence:server');
+      debug(`http://localhost:${process.env.PORT}/`);
+    });
+  
+  } catch (e) {
+    console.error(e);
+    process.exit();
+  }
+
+})();
