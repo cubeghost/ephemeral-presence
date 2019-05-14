@@ -8,28 +8,28 @@ const debugModule = require('debug');
 const { MessageClient, UserClient } = require('./redis');
 const actionTypes = require('./state/actionTypes');
 
+const app = express();
+/* eslint-disable new-cap */
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+const buildDir = path.resolve('build');
+
+app.use(express.static(buildDir));
+app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(buildDir, '/index.html'));
+});
+
+const ACTION = 'action';
+
+const messageClient = new MessageClient();
+
 (async () => {
 
   try {
   
-    const app = express();
-    /* eslint-disable new-cap */
-    const server = require('http').Server(app);
-    const io = require('socket.io')(server);
-
-    const buildDir = path.resolve('build');
-
-    app.use(express.static(buildDir));
-    app.use(bodyParser.json());
-
-    app.get('/', (req, res) => {
-      res.sendFile(path.join(buildDir, '/index.html'));
-    });
-
-    const ACTION = 'action';
-    
-    const messageClient = new MessageClient();
-
     const users = {}; // TODO how to clean up????
     const messages = await messageClient.list();
     console.log(messages)
@@ -82,16 +82,15 @@ const actionTypes = require('./state/actionTypes');
 
           case actionTypes.SEND_MESSAGE:
             if (!users[socket.id]) return;
-
-            const { message } = data;
-            messages.push({
+            
+            messageClient.push({
               user: socket.id,
               username: users[socket.id].username,
-              body: message,
+              body: data.message,
               sentAt: Math.floor(new Date() / 1000),
             });
 
-            debug(`${users[socket.id].username} said: "${message}"`);
+            debug(`${users[socket.id].username} said: "${data.message}"`);
 
             io.emit(ACTION, {
               type: actionTypes.UPDATE_MESSAGES,
@@ -127,14 +126,15 @@ const actionTypes = require('./state/actionTypes');
       });
     });
 
-    server.listen(process.env.PORT, () => {
-      const debug = debugModule('presence:server');
-      debug(`http://localhost:${process.env.PORT}/`);
-    });
-  
   } catch (e) {
     console.error(e);
     process.exit();
   }
 
 })();
+
+server.listen(process.env.PORT, () => {
+  const debug = debugModule('presence:server');
+  debug(`http://localhost:${process.env.PORT}/`);
+});
+

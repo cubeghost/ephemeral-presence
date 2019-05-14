@@ -14,7 +14,8 @@ export class MessageClient {
   }
   
   async list() {
-    return this.client.lrange(this.key, 0, 100);
+    const list = await this.client.lrange(this.key, 0, 100);
+    return list || [];
   }
   
   async push(message) {
