@@ -1,3 +1,7 @@
+function glitchAsset(filename) {
+  return `${process.env.PROJECT_ID}`;
+}
+
 export const CURSORS = {
   'black-cat': { file: require('assets/black-cat.gif'), id: 'black-cat' },
   'brown-cat': { file: require('assets/brown-cat.png'), id: 'brown-cat' },
