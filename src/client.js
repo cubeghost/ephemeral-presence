@@ -39,6 +39,13 @@ const mapDispatchToProps = dispatch => ({
   dispatchClearIdentity: () => dispatch(clearIdentity()),
 });
 
+const boxStyle = {
+  border: '2px solid #00F',
+  boxShadow: '10px 10px 0 0 #00F',
+  backgroundColor: '#fff',
+  padding: '8px'
+};
+
 class Client extends Component {
   constructor() {
     super();
@@ -78,22 +85,25 @@ class Client extends Component {
         cursor: isIdentified ? 'none' : 'default',
         boxSizing: 'border-box',
         padding: '0.5em',
+        display: 'table-row',
       }}>
         <World />
-        <h1 style={{ marginTop: 0 }}>ephemeral web presence space</h1>
-        {!isConnected && (
-          <p style={{ color: 'red' }}>disconnected</p>
-        )} 
-        {isIdentified && (
-          <Fragment>
-            <p>
-              your username is <strong>{username}</strong>
-              <button onClick={dispatchClearIdentity}>log out</button>
-            </p>
-            <p>click to type messages</p>
-          </Fragment>
-        )}
-        {!isIdentified && <Identify />}
+        <h1 style={{ marginTop: 0, ...boxStyle }}>ephemeral web presence space</h1>
+        <div style={boxStyle}>
+          {!isConnected && (
+            <p style={{ color: 'red' }}>disconnected</p>
+          )} 
+          {isIdentified && (
+            <Fragment>
+              <p>
+                your username is <strong>{username}</strong>
+                <button onClick={dispatchClearIdentity}>log out</button>
+              </p>
+              <p>click to type messages</p>
+            </Fragment>
+          )}
+          {!isIdentified && <Identify />}
+        </div>
         {map(users, user => {
           if (user.id === socketId) return null;
 
