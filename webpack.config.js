@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const path = require('path');
+const fs = require('fs')//temp
 const webpack = require('webpack');
 const findCacheDir = require('find-cache-dir');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,6 +9,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
+const PostCompilePlugin = require('post-compile-webpack-plugin');
+const rimraf = require('rimraf');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -49,11 +52,6 @@ const config = {
         test: /\.jsx?$/,
         include: [paths.appSrc],
         use: 'babel-loader',
-      },
-      {
-        test: /\.(jpg|png|gif|eot|svg|ttf|otf|woff|woff2)$/,
-        include: [paths.appSrc],
-        loader: 'file-loader',
       }
     ],
   },
@@ -89,6 +87,10 @@ const config = {
       `${paths.appBuild}/client.*.js`,
       `${paths.appBuild}/vendor.*.js`,
     ]),
+    new PostCompilePlugin((p) => {
+      console.log('post-compile')
+      console.log(fs.existsSync(`build/client.${p.hash}.js`))
+    })
   ]
 };
 

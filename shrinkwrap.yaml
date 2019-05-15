@@ -37,6 +37,7 @@ devDependencies:
   html-webpack-plugin: 3.2.0
   nodemon: 1.19.0
   npm-run-all: 4.1.5
+  post-compile-webpack-plugin: 0.1.2
   react: 16.8.6
   react-dom: 16.8.6
   react-redux: 6.0.1
@@ -44,6 +45,7 @@ devDependencies:
   redux-persist: 5.10.0
   redux-socket.io: 1.4.0
   redux-thunk: 2.3.0
+  rimraf: 2.6.3
   simple-progress-webpack-plugin: 1.1.2
   socket.io-client: 2.2.0
   terser-webpack-plugin: 1.2.3
@@ -4691,6 +4693,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
+  /post-compile-webpack-plugin/0.1.2:
+    dev: true
+    resolution:
+      integrity: sha1-D254Ck3/Ll9Z8gf5A6jV8EdshC4=
   /prelude-ls/1.1.2:
     dev: true
     engines:
@@ -6390,6 +6396,7 @@ specifiers:
   lodash: ^4.17.11
   nodemon: ^1.19.0
   npm-run-all: ^4.1.5
+  post-compile-webpack-plugin: ^0.1.2
   react: ^16.7.0
   react-dom: ^16.7.0
   react-redux: ^6.0.0
@@ -6398,6 +6405,7 @@ specifiers:
   redux-persist: ^5.10.0
   redux-socket.io: ^1.4.0
   redux-thunk: ^2.3.0
+  rimraf: ^2.6.3
   serialize-javascript: ^1.7.0
   simple-progress-webpack-plugin: ^1.1.2
   socket.io: ^2.2.0
