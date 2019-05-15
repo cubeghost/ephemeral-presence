@@ -89,12 +89,14 @@ const config = {
     new PostCompilePlugin((compilation) => {
       // delete all client bundles except the new one
       // helps save disk space on glitch
+      // this doesnt work wtf
+      console.log('post-compile ', compilation.hash)
       del([
         'build/client*.js',
         `!build/client.${compilation.hash.slice(0, 8)}.js`
       ]).then(res => {
         console.log(res)
-      })
+      });
     })
   ]
 };
