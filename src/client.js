@@ -43,7 +43,8 @@ const boxStyle = {
   border: '2px solid #00F',
   boxShadow: '10px 10px 0 0 #00F',
   backgroundColor: '#fff',
-  padding: '8px'
+  padding: '8px 16px',
+  display: 'table'
 };
 
 class Client extends Component {
@@ -85,7 +86,6 @@ class Client extends Component {
         cursor: isIdentified ? 'none' : 'default',
         boxSizing: 'border-box',
         padding: '0.5em',
-        display: 'table-row',
       }}>
         <World />
         <h1 style={{ marginTop: 0, ...boxStyle }}>ephemeral web presence space</h1>
