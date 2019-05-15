@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const path = require('path');
-const fs = require('fs')//temp
 const webpack = require('webpack');
 const findCacheDir = require('find-cache-dir');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
 const PostCompilePlugin = require('post-compile-webpack-plugin');
-const rimraf = require('rimraf');
+const del = require('rimraf');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -87,9 +86,8 @@ const config = {
       `${paths.appBuild}/client.*.js`,
       `${paths.appBuild}/vendor.*.js`,
     ]),
-    new PostCompilePlugin((p) => {
-      console.log('post-compile')
-      console.log(fs.existsSync(`build/client.${p.hash}.js`))
+    new PostCompilePlugin((compilation) => {
+      del
     })
   ]
 };
