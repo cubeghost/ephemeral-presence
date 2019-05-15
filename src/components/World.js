@@ -2,8 +2,10 @@ import React from 'react';
 
 const styles = {
   zIndex: -1,
+  width: '100vw',
+  height: '100vh',
   position: 'fixed',
-  transform: 'translateX(50%) translateY(50%)',
+  // background: 'linear-gradient(0deg, #fdbb2d, #b21f1f, #1a2a6c)'
 };
 
 const Sprite = ({ src, x, y, ...otherProps }) => (
@@ -26,7 +28,7 @@ const World = () => (
       src="https://media.giphy.com/media/l41m2A9tjl7qanqMg/giphy.gif"
       width={300}
       x={-200} 
-      y={100} 
+      y={0} 
     />
   </div>
 );
