@@ -87,7 +87,14 @@ const config = {
       `${paths.appBuild}/vendor.*.js`,
     ]),
     new PostCompilePlugin((compilation) => {
-      del
+      // delete all client bundles except the new one
+      // helps save disk space on glitch
+      del([
+        'build/client*.js',
+        `!build/client.${compilation.hash.slice(0, 8)}.js`
+      ]).then(res => {
+        console.log(res)
+      })
     })
   ]
 };
