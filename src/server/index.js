@@ -3,8 +3,7 @@ require('dotenv').config({ debug: true });
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { map } = require('lodash');
-const { flow } = require('lodash/fp');
+const { difference } = require('lodash');
 const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
@@ -148,9 +147,18 @@ setInterval(async () => {
   const users = await userClient.list();
   const userIds = users.map(user => user.id);
   
-  debug('sockets', currentSockets)
-  debug('users', userIds)
-  debug('diff', )
+  const ghostUsers = difference(userIds, currentSockets);
+  
+  if (ghostUsers.length) {
+    debug(`removing ${ghostUsers.length} ghost users`);
+    
+    await userClient.removeMultiple(ghostUsers);
+    
+    io.emit(ACTION, {
+      type: actionTypes.UPDATE_USERS,
+      data: { users: await userClient.list() }
+    });
+  }
 }, 1000 * 20);
 
 server.listen(process.env.PORT, () => {

@@ -92,4 +92,9 @@ export class UserClient {
   async remove(id) {
     return await this.client.delAsync(this.getKey(id));
   }
+  
+  async removeMultiple(ids) {
+    const keys = ids.map(this.getKey.bind(this));
+    return await this.client.delAsync(keys);
+  }
 }
