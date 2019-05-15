@@ -7,9 +7,10 @@
   },
   "restart": {
     "exclude": [
-      "\\/build.*"
+      "build\\/.*",
+      "src\\/.*"
     ],
     "include": []
   },
-  "throttle": 100
+  "throttle": 500
 }
