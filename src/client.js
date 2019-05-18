@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import SocketProvider from 'components/SocketProvider';
 import Messages from 'components/Messages';
+import Identify from 'components/Identify';
 import User from 'components/User';
 import Self from 'components/Self';
 import World from 'components/World';
@@ -17,7 +18,7 @@ import initialState from 'state/initial';
 import configureStore from 'state/store';
 import { setPosition, clearIdentity } from 'state/actionCreators';
 
-import Identify from './components/Identify';
+import 'style.css';
 
 const MOUSE_DEBOUNCE = 10;
 

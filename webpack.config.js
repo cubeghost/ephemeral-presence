@@ -8,7 +8,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
-const PostCompilePlugin = require('post-compile-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const del = require('rimraf');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -20,6 +20,24 @@ const paths = {
   appSrc: path.resolve(__dirname, './src'),
   appNodeModules: path.resolve(__dirname, './node_modules'),
 };
+
+class CompilePlugin {
+  constructor(fn) {
+    this.fn = fn
+  }
+
+  apply(compiler) {
+    const handler = stats => {
+      if (typeof this.fn === 'function') {
+        this.fn(compiler, stats)
+      }
+    }
+
+    if (compiler.hooks) {
+      compiler.hooks.compilation.tap('compile-webpack-plugin', handler)
+    }
+  }
+}
 
 const config = {
   mode: 'development',
@@ -45,12 +63,22 @@ const config = {
         enforce: 'pre',
         exclude: [/node_modules/],
         include: [paths.appSrc],
-        loader: 'eslint-loader',
+        use: 'eslint-loader',
       },
       {
         test: /\.jsx?$/,
         include: [paths.appSrc],
         use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        include: [paths.appSrc],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader'
+        ]
       }
     ],
   },
@@ -59,6 +87,9 @@ const config = {
     concatenateModules: true,
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
@@ -86,11 +117,11 @@ const config = {
       `${paths.appBuild}/client.*.js`,
       `${paths.appBuild}/vendor.*.js`,
     ]),
-    new PostCompilePlugin((compilation) => {
+    new CompilePlugin((compilation) => {
       // delete all client bundles except the new one
       // helps save disk space on glitch
       // this doesnt work wtf
-      console.log('post-compile ', compilation.hash)
+      console.log('compile ', compilation.hash)
       del([
         'build/client*.js',
         `!build/client.${compilation.hash.slice(0, 8)}.js`
