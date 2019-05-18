@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 const findCacheDir = require('find-cache-dir');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -11,6 +12,7 @@ const WebpackCleanPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
 const del = require('del');
+const { flow, map } = require('lodash/fp');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -22,20 +24,21 @@ const paths = {
   appNodeModules: path.resolve(__dirname, './node_modules'),
 };
 
-class CompilePlugin {
-  constructor(fn) {
+class HookPlugin {
+  constructor(hook, fn) {
+    this.hook = hook
     this.fn = fn
   }
 
   apply(compiler) {
-    const handler = stats => {
+    const handler = params => {
       if (typeof this.fn === 'function') {
-        this.fn(compiler, stats)
+        this.fn(compiler, params)
       }
     }
 
     if (compiler.hooks) {
-      compiler.hooks.compilation.tap('compile-webpack-plugin', handler)
+      compiler.hooks[this.hook].tap('hook-webpack-plugin', handler)
     }
   }
 }
@@ -118,14 +121,22 @@ const config = {
       `${paths.appBuild}/client.*.js`,
       `${paths.appBuild}/vendor.*.js`,
     ]),
-    new CompilePlugin((compilation) => {
+    new HookPlugin('compilation', (compilation) => {
+      console.log('CompilePlugin')
+      //console.log('compilation.options', compilation.options)
       // delete all client bundles except the new one
       // helps save disk space on glitch
       // this doesnt work wtf
       glob('build/client*.js', {}, (err, fileList) => {
         const files = flow(
-          
-        )
+          map(filename => {
+            return {
+              filename: filename,
+              time: fs.statSync(filename).mtime.getTime()
+            }
+          })
+        )(fileList);
+        console.log(files);
       });
       // del('build/client*.js');
     })
