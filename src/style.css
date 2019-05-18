@@ -78,3 +78,19 @@ button.box:disabled {
 form input {
   border: 2px solid var(--box-color);
 }
+
+form label {
+}
+form label.underline {
+  border-bottom: 2px solid var(--box-color);
+}
+
+form.inline button.box {
+  padding: 4px 12px;
+  margin-right: 8px;
+}
+
+form.inline input {
+  padding: 6px;
+  margin-right: 8px;
+}

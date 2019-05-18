@@ -42,9 +42,14 @@ class Identify extends Component {
 
     return (
       <div>
-        <form className="pink" onSubmit={dispatchIdentify}>
+        <form className="inline pink" onSubmit={dispatchIdentify}>
           <CursorPicker />
-          <label htmlFor="username">username: </label>
+          <label 
+            htmlFor="username" 
+            className="underline"
+          >
+            username:
+          </label>
           <input
             type="text"
             //autoFocus={true}
