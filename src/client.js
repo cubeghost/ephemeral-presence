@@ -40,14 +40,6 @@ const mapDispatchToProps = dispatch => ({
   dispatchClearIdentity: () => dispatch(clearIdentity()),
 });
 
-const boxStyle = {
-  border: '2px solid #00F',
-  boxShadow: '10px 10px 0 0 #00F',
-  backgroundColor: '#fff',
-  padding: '8px 16px',
-  display: 'table'
-};
-
 class Client extends Component {
   constructor() {
     super();
@@ -89,8 +81,8 @@ class Client extends Component {
         padding: '0.5em',
       }}>
         <World />
-        <h1 style={{ marginTop: 0, ...boxStyle }}>ephemeral web presence space</h1>
-        <div style={boxStyle}>
+        <h1 className="box">ephemeral web presence space</h1>
+        <div className="box">
           {!isConnected && (
             <p style={{ color: 'red' }}>disconnected</p>
           )} 
@@ -98,7 +90,9 @@ class Client extends Component {
             <Fragment>
               <p>
                 your username is <strong>{username}</strong>
-                <button onClick={dispatchClearIdentity}>log out</button>
+                <button className="box" onClick={dispatchClearIdentity}>
+                  log out
+                </button>
               </p>
               <p>click to type messages</p>
             </Fragment>
