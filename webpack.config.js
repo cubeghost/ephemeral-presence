@@ -12,7 +12,7 @@ const WebpackCleanPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
 const del = require('del');
-const { flow, map } = require('lodash/fp');
+const { flow, map, orderBy } = require('lodash/fp');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -25,8 +25,8 @@ const paths = {
 };
 
 class HookPlugin {
-  constructor(hook, fn) {
-    this.hook = hook
+  constructor(hooks, fn) {
+    this.hooks = hooks
     this.fn = fn
   }
 
@@ -38,7 +38,9 @@ class HookPlugin {
     }
 
     if (compiler.hooks) {
-      compiler.hooks[this.hook].tap('hook-webpack-plugin', handler)
+      this.hooks.forEach(hook => {
+        compiler.hooks[hook].tap('hook-webpack-plugin', handler)
+      });
     }
   }
 }
@@ -117,12 +119,12 @@ const config = {
     ]),
     new FriendlyErrorsWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
-    new WebpackCleanPlugin([
-      `${paths.appBuild}/client.*.js`,
-      `${paths.appBuild}/vendor.*.js`,
-    ]),
-    new HookPlugin('compilation', (compilation) => {
-      console.log('CompilePlugin')
+    // new WebpackCleanPlugin([
+    //   `${paths.appBuild}/client.*.js`,
+    //   `${paths.appBuild}/vendor.*.js`,
+    // ]),
+    new HookPlugin(['done', 'invalid'], (compilation) => {
+      console.log('HookPlugin')
       //console.log('compilation.options', compilation.options)
       // delete all client bundles except the new one
       // helps save disk space on glitch
@@ -132,9 +134,10 @@ const config = {
           map(filename => {
             return {
               filename: filename,
-              time: fs.statSync(filename).mtime.getTime()
+              time: new Date(fs.statSync(filename).mtime.getTime())
             }
-          })
+          }),
+          orderBy(['time'], 'desc'),
         )(fileList);
         console.log(files);
       });

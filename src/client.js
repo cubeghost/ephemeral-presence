@@ -74,7 +74,7 @@ class Client extends Component {
     const { socketId, isConnected, isIdentified, users, username, dispatchClearIdentity } = this.props;
 
     return (
-      <div className="container" style={{ 
+      <div className="container"  style={{ 
         width: '100vw',
         height: '100vh',
         cursor: isIdentified ? 'none' : 'default',
