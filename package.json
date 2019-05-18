@@ -75,7 +75,8 @@
     "uuid": "^3.3.2",
     "redis": "^2.8.0",
     "serialize-javascript": "^1.7.0",
-    "util-promisifyall": "^1.0.6"
+    "util-promisifyall": "^1.0.6",
+    "css-loader": "^2.1.1"
   },
   "eslintConfig": {
     "extends": "./eslintrc.js"
