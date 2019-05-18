@@ -47,7 +47,7 @@ class Identify extends Component {
           <label htmlFor="username">username: </label>
           <input
             type="text"
-            autoFocus={true}
+            //autoFocus={true}
             id="username"
             value={username}
             onChange={dispatchSetUsername}

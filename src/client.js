@@ -79,7 +79,7 @@ class Client extends Component {
       }}>
         <World />
         <h1 className="box">ephemeral web presence space</h1>
-        <div className="box">
+        <div className="box identity">
           {!isConnected && (
             <p style={{ color: 'red' }}>disconnected</p>
           )} 
@@ -87,7 +87,7 @@ class Client extends Component {
             <Fragment>
               <p>
                 your username is <strong>{username}</strong>
-                <button className="box" onClick={dispatchClearIdentity}>
+                <button className="box log-out" onClick={dispatchClearIdentity}>
                   log out
                 </button>
               </p>
