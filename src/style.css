@@ -15,5 +15,11 @@ body {
 }
 
 button.box {
+  box-shadow: 4px 4px 0 0 var(--box-color);
+}
 
+.messages {
+  opacity: 0.75;
+  position: absolute;
+  bottom: 0.5em;
 }
