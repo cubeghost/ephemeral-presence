@@ -79,9 +79,8 @@ form input {
   border: 2px solid var(--box-color);
 }
 
-form label {
-}
 form label.underline {
+  margin-right: 8px;
   border-bottom: 2px solid var(--box-color);
 }
 
