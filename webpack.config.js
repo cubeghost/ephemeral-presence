@@ -12,7 +12,7 @@ const WebpackCleanPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
 const del = require('del');
-const { flow, map, orderBy } = require('lodash/fp');
+const { flow, map, orderBy, slice } = require('lodash/fp');
 
 const PROD = process.env.NODE_ENV === 'production';
 
@@ -26,22 +26,20 @@ const paths = {
 
 class HookPlugin {
   constructor(hooks, fn) {
-    this.hooks = hooks
-    this.fn = fn
+    this.hooks = hooks;
+    this.fn = fn;
   }
 
   apply(compiler) {
     const handler = params => {
       if (typeof this.fn === 'function') {
-        this.fn(compiler, params)
+        this.fn(compiler, params);
       }
     }
 
-    if (compiler.hooks) {
-      this.hooks.forEach(hook => {
-        compiler.hooks[hook].tap('hook-webpack-plugin', handler)
-      });
-    }
+    this.hooks.forEach(hook => {
+      compiler.hooks[hook].tap('hook-webpack-plugin', handler);
+    });
   }
 }
 
@@ -119,16 +117,10 @@ const config = {
     ]),
     new FriendlyErrorsWebpackPlugin(),
     new CaseSensitivePathsPlugin(),
-    // new WebpackCleanPlugin([
-    //   `${paths.appBuild}/client.*.js`,
-    //   `${paths.appBuild}/vendor.*.js`,
-    // ]),
     new HookPlugin(['done', 'invalid'], (compilation) => {
-      console.log('HookPlugin')
-      //console.log('compilation.options', compilation.options)
-      // delete all client bundles except the new one
+      
+      // delete all client bundles except the newest and second-newest
       // helps save disk space on glitch
-      // this doesnt work wtf
       glob('build/client*.js', {}, (err, fileList) => {
         const files = flow(
           map(filename => {
@@ -138,10 +130,16 @@ const config = {
             }
           }),
           orderBy(['time'], 'desc'),
+          slice(2, fileList.length),
+          map('filename'),
         )(fileList);
-        console.log(files);
+        
+        if (files.length > 0) {
+          del(files);
+          console.log('cleaned old build files', files);
+        }
+        
       });
-      // del('build/client*.js');
     })
   ]
 };

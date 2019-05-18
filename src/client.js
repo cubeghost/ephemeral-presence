@@ -74,12 +74,8 @@ class Client extends Component {
     const { socketId, isConnected, isIdentified, users, username, dispatchClearIdentity } = this.props;
 
     return (
-      <div className="container"  style={{ 
-        width: '100vw',
-        height: '100vh',
+      <div className="container" style={{ 
         cursor: isIdentified ? 'none' : 'default',
-        boxSizing: 'border-box',
-        padding: '0.5em',
       }}>
         <World />
         <h1 className="box">ephemeral web presence space</h1>
