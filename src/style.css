@@ -1,26 +1,49 @@
+:root {
+  --box-color: #00F;
+}
+
 body {
   margin: 0;
+  font-size: 16px;
   font-family: 'Courier New', Courier, monospace;
   background-image: url(https://cdn.glitch.com/f4b5730f-2a28-4c77-900c-464991553152%2Ftile.svg?1558141090359);
 }
 
 .box {
-  --box-color: #00F;
-  
   border: 2px solid var(--box-color);
   box-shadow: 10px 10px 0 0 var(--box-color);
   background-color: #fff;
   padding: 8px 16px;
   display: table;
 }
+.pink {
+  --box-color: #F0F;
+}
 
 button {
+  font-size: 1em;
   font-family: 'Courier New', Courier, monospace;  
 }
 
 button.box {
+  display: inline;
   box-shadow: 4px 4px 0 0 var(--box-color);
 }
+button.box:active {
+  box-shadow: 2px 2px 0 0 var(--box-color);
+}
+button.box:disabled {
+  color: #000;
+  opacity: 0.6;
+}
+
+.box p:first-child {
+  margin-top: 0.5em;
+}
+.box p:last-child {
+  margin-bottom: 0.5em;
+}
+
 
 .container {
   box-sizing: border-box;
@@ -49,5 +72,9 @@ button.box {
   position: absolute;
   right: 0;
   top: 0;
-  transform: translateX(calc(64px + 6px)) translateY(calc(32px + 14px));
+  transform: translateX(calc(64px + 16px + 16px)) translateY(calc(32px + 5px));
+}
+
+form input {
+  border: 2px solid var(--box-color);
 }

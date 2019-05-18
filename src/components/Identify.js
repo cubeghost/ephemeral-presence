@@ -42,7 +42,7 @@ class Identify extends Component {
 
     return (
       <div>
-        <form onSubmit={dispatchIdentify}>
+        <form className="pink" onSubmit={dispatchIdentify}>
           <CursorPicker />
           <label htmlFor="username">username: </label>
           <input
@@ -54,6 +54,7 @@ class Identify extends Component {
           />
           <button 
             type="submit" 
+            className="box pink"
             onClick={dispatchIdentify} 
             disabled={isSubmitDisabled}
           >
