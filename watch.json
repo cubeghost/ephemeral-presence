@@ -14,5 +14,5 @@
       "src\\/server\\/.*"    
     ]
   },
-  "throttle": 250
+  "throttle": 500
 }

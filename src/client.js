@@ -20,6 +20,7 @@ import { setPosition, clearIdentity } from 'state/actionCreators';
 
 import 'style.css';
 
+
 const MOUSE_DEBOUNCE = 10;
 
 const socket = io();
@@ -73,7 +74,7 @@ class Client extends Component {
     const { socketId, isConnected, isIdentified, users, username, dispatchClearIdentity } = this.props;
 
     return (
-      <div style={{ 
+      <div className="" style={{ 
         width: '100vw',
         height: '100vh',
         cursor: isIdentified ? 'none' : 'default',

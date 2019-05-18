@@ -9,6 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const WebpackCleanPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const glob = require('glob');
 const del = require('del');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -121,7 +122,12 @@ const config = {
       // delete all client bundles except the new one
       // helps save disk space on glitch
       // this doesnt work wtf
-      del('build/client*.js');
+      glob('build/client*.js', {}, (err, fileList) => {
+        const files = flow(
+          
+        )
+      });
+      // del('build/client*.js');
     })
   ]
 };
