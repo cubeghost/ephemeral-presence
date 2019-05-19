@@ -10,7 +10,7 @@ class About extends Component {
     autobind(this);
 
     this.state = {
-      isOpen: true, // TODO change
+      isOpen: false,
     };
   }
 
@@ -35,13 +35,18 @@ class About extends Component {
                 https://twitter.com/cubeghost/status/949801647617822720
               </Link>
             </p>
+            <p>
+              it's like a liminal space but in cyber...space
+            </p>
+            <h3>how</h3>
+            <p>websockets, <Link href="https://glitch.com">glitch.com</Link>, redis</p>
             <h3>credits</h3>
             <ul>
               <li>
                 cursors are from <Link href="https://web.archive.org/web/20120120140355/http://www.webfetti.com:80/MySpace/Cursors/Animals.jhtml?pageNumber=3">webfetti</Link> (h/t internet archive)
               </li>
               <li>
-                see <Link href="https://glitch.com/edit/#!/ephemeral-presence?path=src/components/World.js">World.js</Link> for
+                see <Link href="https://glitch.com/edit/#!/ephemeral-presence?path=src/components/World.js">components/World.js</Link> for
                 gif sources
               </li>
             </ul>

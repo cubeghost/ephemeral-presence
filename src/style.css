@@ -86,7 +86,7 @@ h1 {
 }
 
 .identity {
-  transform: translateX(2rem) translateY(-2.5rem);
+  transform: translateX(2rem) translateY(-2.25rem);
 }
 
 .log-out {
@@ -110,7 +110,7 @@ h1 {
 .close-about-button {
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
   transform: translateX(2rem) translateY(1rem);
 }
 .about {
@@ -179,6 +179,7 @@ form.inline input {
 }
 
 .self {
+  z-index: 100;
   pointer-events: none;
 }
 .self form {
