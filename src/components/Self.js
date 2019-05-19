@@ -96,13 +96,15 @@ class Self extends Component {
 
     return (
       <div style={{ ...getPositionStyle(position), pointerEvents: 'none' }}>
-
-        <img src={get(CURSORS, `${cursor}.file`)} />
-
-        <span style={{ marginLeft: '0.25em' }}>{username}</span>
+        
+        <div style={{  }}>
+          <img src={get(CURSORS, `${cursor}.file`)} />
+          &nbsp;
+          <span>{username}</span>
+        </div>
 
         {isInputEnabled && (
-          <form onSubmit={this.sendMessage}>
+          <form className="inline" onSubmit={this.sendMessage}>
             <input
               type="text"
               autoFocus={true}

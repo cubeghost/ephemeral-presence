@@ -124,7 +124,10 @@ const config = {
       glob('build/client*.js', {}, (err, fileList) => {
         const files = flow(
           map(filename => {
-            try 
+            let timestamp = 0;
+            try {
+              timestamp = fs.statSync(filename).mtime.getTime()
+            } catch(e) {}
             return {
               filename: filename,
               time: new Date(timestamp)

@@ -1,12 +1,18 @@
 :root {
+  --font: 'Courier New', Courier, monospace;
   --color-rgb: 0, 0, 255;
   --color: rgba(var(--color-rgb), 1);
 }
+.pink {
+  --color-rgb: 255, 0, 255; 
+  --color: rgba(var(--color-rgb), 1);
+}
+
 
 body {
   margin: 0;
   font-size: 16px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font);
   background-image: url(https://cdn.glitch.com/f4b5730f-2a28-4c77-900c-464991553152%2Ftile.svg?1558141090359);
 }
 
@@ -17,13 +23,10 @@ body {
   padding: 8px 16px;
   display: table;
 }
-.pink {
-  --color-rgb: 255, 0, 255;
-}
 
 button {
   font-size: 1em;
-  font-family: 'Courier New', Courier, monospace;  
+  font-family: var(--font);  
 }
 
 button.box {
@@ -35,7 +38,7 @@ button.box:active {
 }
 button.box:disabled {
   color: #000;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .box p:first-child {
@@ -76,8 +79,13 @@ button.box:disabled {
   transform: translateX(calc(64px + 16px + 16px)) translateY(calc(32px + 5px));
 }
 
-form input {
+input[type=text] {
+  font-family: var(--font);
   border: 2px solid var(--color);
+}
+input[type=text]:focus {
+  outline: 0;
+  box-shadow: 2px 2px 0 0 rgba(var(--color-rgb), 0.5);
 }
 
 form label.underline {
@@ -95,10 +103,24 @@ form.inline input {
   margin-right: 8px;
 }
 
+
+.cursor-picker {
+  margin-bottom: 8px;
+}
 .cursor-option {
   display: inline-block;
   padding: 2px;
 }
 .cursor-option.is-selected {
-  background-color: rgba(var(--color-rgb), 0.75);
+  background-color: rgba(var(--color-rgb), 0.5);
+}
+.cursor-option input[type=radio] {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  margin: 0;
+  display: block;
+}
+.cursor-option img {
+  display: block;
 }

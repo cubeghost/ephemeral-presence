@@ -17,13 +17,6 @@ const CursorOption = ({ file, id, isSelected, dispatchSetCursor }) => (
       type="radio"
       id={`CursorOption-${id}`}
       onChange={dispatchSetCursor}
-      style={{
-        opacity: 0,
-        height: 0,
-        width: 0,
-        margin: 0,
-        display: 'block',
-      }}
     />
     <img 
       src={file} 
@@ -42,8 +35,8 @@ const ConnectedCursorOption = connect(mapStateToProps, mapDispatchToProps)(Curso
 class CursorPicker extends Component {
   render() {
     return (
-      <div>
-        <p>select a cursor:</p>
+      <div className="cursor-picker">
+        <p><strong>select a cursor:</strong></p>
         {map(CURSORS, cursor => (
           <ConnectedCursorOption {...cursor} key={`CursorOption-${cursor.id}`} />
         ))}
