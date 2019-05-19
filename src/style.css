@@ -1,10 +1,15 @@
 :root {
   --font: 'Courier New', Courier, monospace;
-  --color-rgb: 0, 0, 255;
+  
+  --color-rgb: 0, 0, 255; /* #00F */
   --color: rgba(var(--color-rgb), 1);
 }
 .pink {
-  --color-rgb: 255, 0, 255; 
+  --color-rgb: 255, 0, 255; /* #F0F */
+  --color: rgba(var(--color-rgb), 1);
+}
+.purple {
+  --color-rgb: 153, 0, 255; /* #90F */
   --color: rgba(var(--color-rgb), 1);
 }
 

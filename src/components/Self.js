@@ -103,7 +103,7 @@ class Self extends Component {
         </div>
 
         {isInputEnabled && (
-          <form className="inline pink" onSubmit={this.sendMessage}>
+          <form className="inline purple" onSubmit={this.sendMessage}>
             <input
               type="text"
               autoFocus={true}
