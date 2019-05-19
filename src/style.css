@@ -107,6 +107,19 @@ h1 {
   top: 0;
   transform: translateX(4rem) translateY(1rem);
 }
+.close-about-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(2rem) translateY(1rem);
+}
+.about {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 5;
+}
 
 
 input[type=text] {

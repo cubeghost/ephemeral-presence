@@ -56,9 +56,9 @@ const World = () => (
       }}
     />
     
-    {/* https://giphy.com/stickers/fo2dhRTmaULbStoFkX */}
     <Sprite 
       name="sparkle"
+      source="https://giphy.com/stickers/fo2dhRTmaULbStoFkX"
       src="https://media.giphy.com/media/fo2dhRTmaULbStoFkX/200.gif"
       width={150}
       position={{
@@ -66,9 +66,10 @@ const World = () => (
         right: '15vw'
       }}
     />
-
+    
     <Sprite 
       name="crystal floating serenely"
+      source="https://giphy.com/stickers/3ov9jDblR6W2d6NfJC"
       src="https://media.giphy.com/media/3ov9jDblR6W2d6NfJC/200.gif"  
       width={150}
       position={{
@@ -83,7 +84,7 @@ const World = () => (
 export default World;
 
 /*
-    ufo
+    ufo https://gifcities.org/?q=ufo
     <Sprite 
       src="https://web.archive.org/web/20091027023806/http://www.geocities.com/jd676767/tiny-ufo.gif"
       position={{
