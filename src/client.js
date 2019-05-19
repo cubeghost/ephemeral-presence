@@ -78,7 +78,11 @@ class Client extends Component {
         cursor: isIdentified ? 'none' : 'default',
       }}>
         <h1 className="box">ephemeral web presence space</h1>
-        <div className="remix-button">
+        <div className="glitch-buttons">
+          <a href="https://glitch.com/edit/#!/ephemeral-presence">
+            <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fview-source%402x.png?1513093958802" alt="view source" height="33" />
+          </a>
+          &nbsp;
           <a href="https://glitch.com/edit/#!/remix/ephemeral-presence">
             <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix this" height="33" />
           </a>

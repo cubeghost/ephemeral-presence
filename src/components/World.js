@@ -6,7 +6,7 @@ const Sprite = ({ name, position, ...otherProps }) => (
     style={{
       display: 'block',
       position: 'absolute',
-      z
+      zIndex: -2,
       ...position
     }}
     {...otherProps}
