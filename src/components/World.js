@@ -61,7 +61,7 @@ const World = () => (
     />
     
     <Sprite 
-      name="sparkle"
+      name="sparkles"
       source="https://giphy.com/stickers/fo2dhRTmaULbStoFkX"
       src="https://media.giphy.com/media/fo2dhRTmaULbStoFkX/200.gif"
       width={150}
