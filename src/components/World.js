@@ -42,7 +42,7 @@ const World = () => (
     />
     
     <Sprite 
-      src="https://media.giphy.com/media/7XuS2vVsAc83iwIuAF/giphy.gif"
+      src="https://media.giphy.com/media/7XuS2vVsAc83iwIuAF/200.gif"
       width={100}
       position={{
         top: '30vh',
@@ -51,10 +51,21 @@ const World = () => (
      />
 
     <Sprite 
-      src="https://web.archive.org/web/20091027023806/http://www.geocities.com/jd676767/tiny-ufo.gif"
+      src="https://media.giphy.com/media/AyN4lt9z581zi/giphy.gif"
+      width={150}
       position={{
-        top: '20vh',
-        right: '30vh'
+        top: '-20px',
+        right: '10vw'
+      }}
+    />
+    
+
+    <Sprite 
+      src="https://media.giphy.com/media/3ov9jDblR6W2d6NfJC/200.gif"  
+      width={150}
+      position={{
+        bottom: '34vh',
+        right: '32vw'
       }}
     />
     
@@ -64,10 +75,13 @@ const World = () => (
 export default World;
 
 /*
+    ufo
     <Sprite 
-      src="https://media.giphy.com/media/AyN4lt9z581zi/giphy.gif"
-      width={200}
-      x={-200}
-      y={-200}
+      src="https://web.archive.org/web/20091027023806/http://www.geocities.com/jd676767/tiny-ufo.gif"
+      position={{
+        top: '20vh',
+        right: '30vh'
+      }}
     />
+    
 */

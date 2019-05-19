@@ -66,6 +66,7 @@ class Identify extends Component {
             ok
           </button>
           <label htmlFor="shouldPersistIdentity">
+            &nbsp;&nbsp;
             <input
               type="checkbox" 
               id="shouldPersistIdentity" 
