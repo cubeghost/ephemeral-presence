@@ -40,6 +40,11 @@ const World = () => (
         right: '10vw'
       }}
     />
+    
+    <Sprite 
+      src="https://media.giphy.com/media/7XuS2vVsAc83iwIuAF/giphy.gif"
+      width={100}
+     />
 
   </div>
 );
