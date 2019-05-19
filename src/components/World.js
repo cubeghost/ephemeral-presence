@@ -1,9 +1,5 @@
 import React from 'react';
 
-const styles = {
-  zIndex: -1,
-};
-
 const Sprite = ({ name, position, ...otherProps }) => (
   <img 
     alt={name}
@@ -17,7 +13,7 @@ const Sprite = ({ name, position, ...otherProps }) => (
 );
 
 const World = () => (
-  <div style={styles}>
+  <div className="world">
 
     <Sprite 
       name="palm tree"

@@ -73,6 +73,11 @@ button.box:disabled {
   opacity: 0.75;
   position: absolute;
   bottom: 0.5em;
+  z-index: -1;
+}
+
+.world {
+  z-index: -2;
 }
 
 .identity {
@@ -147,4 +152,11 @@ form.inline input {
 }
 .self form {
   margin-top: 8px;
+}
+
+
+.remix-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
 }
