@@ -78,8 +78,10 @@ class Client extends Component {
       <div className="container" style={{ 
         cursor: isIdentified ? 'none' : 'default',
       }}>
-        <h1 className="box">ephemeral web presence space</h1>
-        <About />
+        <div className="box header">
+          <h1>ephemeral web presence space</h1>
+          <About />
+        </div>
         <div className="glitch-buttons">
           <a href="https://glitch.com/edit/#!/ephemeral-presence">
             <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fview-source%402x.png?1513093958802" alt="view source" height="33" />

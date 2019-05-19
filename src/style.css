@@ -13,10 +13,12 @@
   --color: rgba(var(--color-rgb), 1);
 }
 
+html {
+  font-size: 16px;
+}
 
 body {
   margin: 0;
-  font-size: 16px;
   font-family: var(--font);
   background-image: url(https://cdn.glitch.com/f4b5730f-2a28-4c77-900c-464991553152%2Ftile.svg?1558141090359);
 }
@@ -51,10 +53,10 @@ button.box:disabled {
 }
 
 .box p:first-child {
-  margin-top: 0.5em;
+  margin-top: 0.5rem;
 }
 .box p:last-child {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 }
 
 
@@ -63,19 +65,18 @@ button.box:disabled {
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
-.container h1 {
+h1 {
   margin-top: 0;
-  padding-bottom: 32px;
-  padding-right: 64px;
+  margin-bottom: 0;
 }
 
 .messages {
   opacity: 0.75;
   position: absolute;
-  bottom: 0.5em;
+  bottom: 0.5rem;
   max-width: 50vw;
   z-index: 1;
 }
@@ -85,15 +86,28 @@ button.box:disabled {
 }
 
 .identity {
-  transform: translateX(32px) translateY(-48px);
+  transform: translateX(2rem) translateY(-2.5rem);
 }
 
 .log-out {
   position: absolute;
   right: 0;
   top: 0;
-  transform: translateX(calc(64px + 16px + 15px)) translateY(calc(32px + 6px));
+  transform: translateX(calc(5rem + 15px)) translateY(calc(2rem + 6px));
 }
+
+.header {
+  padding-bottom: 2.5rem;
+  padding-right: 4rem;
+  position: relative;
+}
+.about-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(4rem) translateY(1rem);
+}
+
 
 input[type=text] {
   font-family: var(--font);
@@ -105,23 +119,23 @@ input[type=text]:focus {
 }
 
 form label.underline {
-  margin-right: 8px;
+  margin-right: 0.5rem;
   border-bottom: 2px solid var(--color);
 }
 
 form.inline button.box {
   padding: 4px 12px;
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 form.inline input {
   padding: 6px;
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 
 .cursor-picker {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 .cursor-option {
   display: inline-block;
@@ -148,19 +162,19 @@ form.inline input {
   z-index: 100;
 }
 .user img {
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 .self {
   pointer-events: none;
 }
 .self form {
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
 
 
 .glitch-buttons {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: 0.5rem;
+  right: 0.75rem;
 }

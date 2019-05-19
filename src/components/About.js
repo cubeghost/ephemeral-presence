@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import autobind from 'class-autobind';
 
 class About extends Component {
@@ -8,7 +8,7 @@ class About extends Component {
     autobind(this);
 
     this.state = {
-      isOpen: false,
+      isOpen: true, // TODO change
     };
   }
 
@@ -22,10 +22,14 @@ class About extends Component {
 
     return (
       <Fragment>
-        <button className="box about-button">
+        <button className="box about-button" onClick={this.handleClick}>
           about
         </button>
-      
+        {isOpen && (
+          <div className="box about">
+            <h2>credits</h2>
+          </div>
+        )}
       </Fragment>
     );
   }
