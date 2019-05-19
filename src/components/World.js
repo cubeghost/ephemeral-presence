@@ -5,7 +5,8 @@ const Sprite = ({ name, position, ...otherProps }) => (
     alt={name}
     style={{
       display: 'block',
-      position: 'fixed',
+      position: 'absolute',
+      z
       ...position
     }}
     {...otherProps}

@@ -32,7 +32,7 @@ export class MessageClient {
   }
   
   async push(message) {
-    await this.client.rpushAsync(
+    await this.client.lpushAsync(
       this.key,
       serialize(message)
     );
