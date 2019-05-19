@@ -33,7 +33,9 @@ button.box {
   display: inline;
   box-shadow: 4px 4px 0 0 var(--color);
 }
-button.box:active {
+button.box:active,
+button.box:focus {
+  outline: 0;
   box-shadow: 2px 2px 0 0 var(--color);
 }
 button.box:disabled {
@@ -123,4 +125,21 @@ form.inline input {
 }
 .cursor-option img {
   display: block;
+}
+
+
+.user {
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+.user img {
+  margin-right: 8px;
+}
+
+.self {
+  pointer-events: none;
+}
+.self form {
+  margin-top: 8px;
 }

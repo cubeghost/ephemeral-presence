@@ -95,12 +95,11 @@ class Self extends Component {
     if (!isIdentified || !position || !username) return null;
 
     return (
-      <div style={{ ...getPositionStyle(position), pointerEvents: 'none' }}>
+      <div className="self" style={getPositionStyle(position)}>
         
-        <div style={{  }}>
+        <div className="user">
           <img src={get(CURSORS, `${cursor}.file`)} />
-          &nbsp;
-          <span>{username}</span>
+          <span className="username">{username}</span>
         </div>
 
         {isInputEnabled && (

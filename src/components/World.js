@@ -28,7 +28,7 @@ const World = () => (
       src="https://media.giphy.com/media/l41m2A9tjl7qanqMg/giphy.gif"
       width={300}
       x={-100} 
-      y={-40} 
+      y={-90} 
     />
   </div>
 );
