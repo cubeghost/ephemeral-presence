@@ -53,7 +53,8 @@ const World = () => (
     <Sprite 
       src="https://web.archive.org/web/20091027023806/http://www.geocities.com/jd676767/tiny-ufo.gif"
       position={{
-        top:20
+        top: '20vh',
+        right: '30vh'
       }}
     />
     
