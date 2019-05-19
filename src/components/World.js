@@ -59,6 +59,16 @@ const World = () => (
       }}
     />
     
+    <Sprite 
+      name="sparkle"
+      src="https://media.giphy.com/media/fo2dhRTmaULbStoFkX/200.gif"
+      width={150}
+      position={{
+        top: '7vw',
+        right: '15vw'
+      }}
+    />
+    
 
     <Sprite 
       name="crystal floating serenely"
