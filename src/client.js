@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import autobind from 'class-autobind';
 import { map } from 'lodash';
 import debounce from 'debounce';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 
 import SocketProvider from 'components/SocketProvider';
 import Messages from 'components/Messages';

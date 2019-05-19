@@ -78,7 +78,7 @@ button.box:disabled {
   position: absolute;
   right: 0;
   top: 0;
-  transform: translateX(calc(64px + 16px + 16px)) translateY(calc(32px + 5px));
+  transform: translateX(calc(64px + 16px + 15px)) translateY(calc(32px + 6px));
 }
 
 input[type=text] {

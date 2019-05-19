@@ -130,7 +130,7 @@ const config = {
             } catch(e) {}
             return {
               filename: filename,
-              time: new Date(timestamp)
+              time: timestamp
             }
           }),
           orderBy(['time'], 'desc'),

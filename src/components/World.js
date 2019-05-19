@@ -2,21 +2,19 @@ import React from 'react';
 
 const styles = {
   zIndex: -1,
-  top: 0,
-  left: 0,
-  width: '100vw',
-  height: '100vh',
-  position: 'fixed',
+  // top: 0,
+  // left: 0,
+  // width: '100vw',
+  // height: '100vh',
+  // position: 'fixed',
 };
 
-const Sprite = ({ x, y, ...otherProps }) => (
+const Sprite = ({ position, ...otherProps }) => (
   <img 
     style={{
       display: 'block',
       position: 'fixed',
-      top: '50vh',
-      left: '50vw',
-      transform: `translateX(${x}px) translateY(${y}px)`
+      ...position
     }}
     {...otherProps}
   />
@@ -24,12 +22,25 @@ const Sprite = ({ x, y, ...otherProps }) => (
 
 const World = () => (
   <div style={styles}>
+
+    <Sprite 
+      src="https://media.giphy.com/media/VsIzjbp1YqdGg/giphy.gif"
+      width={200}
+      position={{
+        bottom: 0,
+        right: '40vw'
+      }}
+    />
+
     <Sprite 
       src="https://media.giphy.com/media/l41m2A9tjl7qanqMg/giphy.gif"
       width={300}
-      x={-100} 
-      y={-90} 
+      position={{
+        bottom: '-20px',
+        right: '10vw'
+      }}
     />
+
   </div>
 );
 
