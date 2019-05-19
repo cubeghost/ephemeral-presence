@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { map } from 'lodash';
 import { connect } from 'react-redux';
 
@@ -8,6 +9,7 @@ import { CURSORS } from 'consts';
 const CursorOption = ({ file, id, isSelected, dispatchSetCursor }) => (
   <label 
     htmlFor={`CursorOption-${id}`}
+    className="cursor-option"
     style={{
       backgroundColor: isSelected ? 'rgba(0, 0, 255, 0.2)' : 'transparent',
       display: 'inline-block',
