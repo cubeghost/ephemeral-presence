@@ -44,8 +44,19 @@ const World = () => (
     <Sprite 
       src="https://media.giphy.com/media/7XuS2vVsAc83iwIuAF/giphy.gif"
       width={100}
+      position={{
+        top: '30vh',
+        left: '20vw'
+      }}
      />
 
+    <Sprite 
+      src="https://web.archive.org/web/20091027023806/http://www.geocities.com/jd676767/tiny-ufo.gif"
+      position={{
+        top:20
+      }}
+    />
+    
   </div>
 );
 
