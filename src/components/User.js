@@ -13,7 +13,7 @@ const User = ({
 
   return (
     <div className="user" style={getPositionStyle(position)}>
-      <img src={CURSORS[cursor].file} />
+      <img src={CURSORS[cursor].file} alt={CURSORS[cursor].id} />
       <span className="username">
         {username}
         {(typing !== null) && (

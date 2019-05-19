@@ -98,12 +98,12 @@ class Self extends Component {
       <div className="self" style={getPositionStyle(position)}>
         
         <div className="user">
-          <img src={get(CURSORS, `${cursor}.file`)} />
+          <img src={get(CURSORS, `${cursor}.file`)} alt={CURSORS[cursor].id} />
           <span className="username">{username}</span>
         </div>
 
         {isInputEnabled && (
-          <form className="inline" onSubmit={this.sendMessage}>
+          <form className="inline pink" onSubmit={this.sendMessage}>
             <input
               type="text"
               autoFocus={true}
