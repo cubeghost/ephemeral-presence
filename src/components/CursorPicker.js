@@ -9,12 +9,9 @@ import { CURSORS } from 'consts';
 const CursorOption = ({ file, id, isSelected, dispatchSetCursor }) => (
   <label 
     htmlFor={`CursorOption-${id}`}
-    className="cursor-option"
-    style={{
-      backgroundColor: isSelected ? 'rgba(0, 0, 255, 0.2)' : 'transparent',
-      display: 'inline-block',
-      padding: '2px',
-    }}
+    className={classNames('cursor-option', {
+      'is-selected': isSelected
+    })}
   >
     <input
       type="radio"

@@ -124,9 +124,10 @@ const config = {
       glob('build/client*.js', {}, (err, fileList) => {
         const files = flow(
           map(filename => {
+            try 
             return {
               filename: filename,
-              time: new Date(fs.statSync(filename).mtime.getTime())
+              time: new Date(timestamp)
             }
           }),
           orderBy(['time'], 'desc'),
