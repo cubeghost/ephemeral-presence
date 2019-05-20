@@ -1,4 +1,5 @@
 // TODO this could be a webpack loader 👀
+// esp since i can't do the same for the background image in style.css
 function asset(filename) {
   return `https://cdn.glitch.com/${process.env.PROJECT_ID}%2F${filename}`;
 }
