@@ -20,10 +20,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font);
-  /*
   background-image: url(https://cdn.glitch.com/f4b5730f-2a28-4c77-900c-464991553152%2Ftile.svg?1558141090359);
-  */
-  background-image: url(tile.svg);
 }
 
 .box {
