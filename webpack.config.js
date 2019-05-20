@@ -81,7 +81,10 @@ const config = {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader'
+          'css-loader',
+          {
+            loader: path.resolve('glitch-webpack-plugin.js')
+          },
         ]
       }
     ],
