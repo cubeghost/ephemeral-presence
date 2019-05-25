@@ -1,4 +1,4 @@
-lconst redis = require('redis');
+const redis = require('redis');
 const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');
 const debug = require('debug')('presence:redis');
@@ -11,7 +11,6 @@ const USER_EXPIRY = 60 * 60 * 24;
 const MESSAGE_EXPIRY = 60 * 60;
 
 const redisClient = redis.createClient(process.env.REDIS_URL);
-//redisClient.flushallAsync();
 
 /*
   normally doing json in redis this way (stringifying and parsing
