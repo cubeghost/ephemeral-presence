@@ -19,3 +19,7 @@ export const SEND_MESSAGE = `${SERVER_ACTION_PREFIX}MESSAGES/send`;
 
 export const SET_SOCKET_ID = 'CONNECTION/setSocketId';
 export const SET_IS_CONNECTED = 'CONNECTION/setIsConnected';
+
+export const REJECT_IDENTIFY = `REJECT/${IDENTIFY}`;
+export const REJECT_TYPING = `REJECT/${SET_TYPING}`;
+export const REJECT_MESSAGE = `REJECT/${SEND_MESSAGE}`;

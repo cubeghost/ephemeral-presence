@@ -7,7 +7,8 @@ const { difference } = require('lodash');
 const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
-const makeFilter = require('./filter');
+const { makeFilter } = require('./filter');
+console.log(makeFilter())
 const actionTypes = require('../state/actionTypes');
 
 const app = express();
@@ -25,7 +26,6 @@ app.get('/', (req, res) => {
 });
 
 const ACTION = 'action';
-const REJECT = 'reject';
 
 const userClient = new UserClient();
 const messageClient = new MessageClient();
@@ -53,7 +53,8 @@ io.on('connection', async socket => {
         const { username, cursor } = data;
         
         if (filter.test(username)) {
-          socket.emit(REJECT, { type, data });
+          console.log('bad!!')
+          socket.emit(ACTION, { type: actionTypes.REJECT_IDENTIFY });
           break;
         }
 
@@ -94,7 +95,7 @@ io.on('connection', async socket => {
         const { typing } = data;
 
         if (filter.test(typing)) {
-          socket.emit(REJECT, { type, data });
+          socket.emit(ACTION, { type: actionTypes.REJECT_TYPING });
           break;
         }
         
@@ -112,7 +113,7 @@ io.on('connection', async socket => {
         if (!user) return;
 
         if (filter.test(data.message)) {
-          socket.emit(REJECT, { type, data });
+          socket.emit(ACTION, { type: actionTypes.REJECT_MESSAGE });
           break;
         }
 

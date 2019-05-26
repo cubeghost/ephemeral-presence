@@ -19,6 +19,8 @@ class SocketProvider extends Component {
       dispatchDisconnect, 
       dispatchIdentify 
     } = this.props;
+    
+    socket.on('action', console.log)
 
     socket.on('connect', () => {
       dispatchSetSocketId(this.props.socket.id);
