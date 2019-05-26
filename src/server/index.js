@@ -7,6 +7,7 @@ const { difference } = require('lodash');
 const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
+const makeFilter = require('./filter');
 const actionTypes = require('../state/actionTypes');
 
 const app = express();
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 });
 
 const ACTION = 'action';
+const REJECT = 'reject';
 
 const userClient = new UserClient();
 const messageClient = new MessageClient();
@@ -44,10 +46,16 @@ io.on('connection', async socket => {
 
   socket.on(ACTION, async ({ type, data }) => {
     const user = await userClient.get(socket.id);
+    const filter = makeFilter();
 
     switch (type) {
       case actionTypes.IDENTIFY:
         const { username, cursor } = data;
+        
+        if (filter.test(username)) {
+          socket.emit(REJECT, { type, data });
+          break;
+        }
 
         const newUser = {
           id: socket.id,
@@ -84,6 +92,12 @@ io.on('connection', async socket => {
         if (!user) return;
 
         const { typing } = data;
+
+        if (filter.test(typing)) {
+          socket.emit(REJECT, { type, data });
+          break;
+        }
+        
         user.typing = typing;
 
         await userClient.set(user);
@@ -96,6 +110,11 @@ io.on('connection', async socket => {
 
       case actionTypes.SEND_MESSAGE:
         if (!user) return;
+
+        if (filter.test(data.message)) {
+          socket.emit(REJECT, { type, data });
+          break;
+        }
 
         await messageClient.push({
           user: socket.id,
