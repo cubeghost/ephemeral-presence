@@ -4,7 +4,7 @@
   THIS IS A BANNED WORDS FILTER 
   SO THERE ARE RACIAL SLURS ON IT
   DONT SCROLL DOWN UNLESS NECESSARY
-  
+  !!!!!!!!!!!!
   
   
   
@@ -41,7 +41,8 @@
 
 */
 
-const list = [
+const wordlist = [
+  '1488',
   'beaner',
   'bitch',
   'chink',
@@ -74,4 +75,9 @@ const list = [
   'whore'
 ];
 
-export default list;
+const echoesRegexString = '\(\(\([^\(\)]+\)\)\)';
+const wordRegexString = wordlist.join('|');
+
+const filter = new RegExp(echoesRegexString + '|' + wordRegexString, 'gi');
+
+export default filter;
