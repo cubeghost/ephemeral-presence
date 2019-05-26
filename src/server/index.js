@@ -8,7 +8,6 @@ const debugModule = require('debug');
 
 const { MessageClient, UserClient } = require('./redis');
 const { makeFilter } = require('./filter');
-console.log(makeFilter())
 const actionTypes = require('../state/actionTypes');
 
 const app = express();
@@ -53,8 +52,7 @@ io.on('connection', async socket => {
         const { username, cursor } = data;
         
         if (filter.test(username)) {
-          console.log('bad!!')
-          socket.emit(ACTION, { type: actionTypes.REJECT_IDENTIFY });
+          socket.emit('error', { type: actionTypes.REJECT_IDENTIFY });
           break;
         }
 

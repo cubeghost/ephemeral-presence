@@ -29,6 +29,10 @@ const selfReducer = (state = initialState.self, action) => {
         username: initialState.self.username,
         cursor: initialState.self.cursor,
       });
+    case actionTypes.REJECT_USERNAME:
+      return assign({}, state, {
+        username: initialState.self.username,
+      });
     default:
       return state;
   }

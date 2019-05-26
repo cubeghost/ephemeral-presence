@@ -76,8 +76,8 @@ const wordlist = [
 ];
 
 const echoesRegexString = '\(\(\([^\(\)]+\)\)\)';
-const wordRegexString = wordlist.join('|');
+const wordRegexString = `(\b(${wordlist.join('|')})\b)`;
 
 export function makeFilter() {
-  return new RegExp(echoesRegexString + '|' + wordRegexString, 'gi');
+  return new RegExp(`${echoesRegexString}|${wordRegexString}`, 'gi');
 };
