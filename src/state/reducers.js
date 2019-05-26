@@ -59,6 +59,8 @@ const messagesReducer = (state = initialState.messages, action) => {
 
 const errorsReducer = (state = initialState.errors, action) => {
   switch (action.type) {
+    case actionTypes.REJECT_USERNAME:
+      return [...state, {  }];
     default:
       return state;
   }
@@ -73,6 +75,7 @@ const connectionReducer = (state = initialState.connection, action) => {
     case actionTypes.IDENTIFY:
       return assign({}, state, { isIdentified: true });
     case actionTypes.CLEAR_IDENTITY:
+    case actionTypes.REJECT_USERNAME:
       return assign({}, state, { isIdentified: false });
     default:
       return state;

@@ -11,8 +11,8 @@ export const CLEAR_IDENTITY = `${SERVER_ACTION_PREFIX}USER/clearIdentity`;
 export const SET_POSITION = `${SERVER_ACTION_PREFIX}USER/setPosition`;
 export const SET_TYPING = `${SERVER_ACTION_PREFIX}USER/setTyping`;
 
-export const SET_USERNAME = `SELF/setUsername`;
-export const SET_CURSOR = `SELF/setCursor`;
+export const SET_USERNAME = 'SELF/setUsername';
+export const SET_CURSOR = 'SELF/setCursor';
 export const SET_SHOULD_PERSIST_IDENTITY = 'SELF/setShouldPersistIdentity';
 
 export const SEND_MESSAGE = `${SERVER_ACTION_PREFIX}MESSAGES/send`;

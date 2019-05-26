@@ -52,7 +52,7 @@ io.on('connection', async socket => {
         const { username, cursor } = data;
         
         if (filter.test(username)) {
-          socket.emit('error', { type: actionTypes.REJECT_IDENTIFY });
+          socket.emit(ACTION, { type: actionTypes.REJECT_USERNAME });
           break;
         }
 

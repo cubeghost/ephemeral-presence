@@ -75,8 +75,8 @@ const wordlist = [
   'whore'
 ];
 
-const echoesRegexString = '\(\(\([^\(\)]+\)\)\)';
-const wordRegexString = `(\b(${wordlist.join('|')})\b)`;
+const echoesRegexString = '\\(\\(\\([^\\(\\)]+\\)\\)\\)';
+const wordRegexString = `(\\b(${wordlist.join('|')})\\b)`;
 
 export function makeFilter() {
   return new RegExp(`${echoesRegexString}|${wordRegexString}`, 'gi');
