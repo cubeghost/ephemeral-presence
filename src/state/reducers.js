@@ -58,9 +58,7 @@ const messagesReducer = (state = initialState.messages, action) => {
 };
 
 const errorsReducer = (state = initialState.errors, action) => {
-  switch (action.type) {
-    case actionTypes.REJECT_USERNAME:
-      return [...state, {  }];
+  switch (action.type) { 
     default:
       return state;
   }
