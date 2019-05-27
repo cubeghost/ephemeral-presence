@@ -53,6 +53,8 @@ const wordlist = [
   'faggots',
   'gook',
   'jigaboo',
+  'kek',
+  'kekistan',
   'kike',
   'kikes',
   'kyke',
