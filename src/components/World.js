@@ -82,6 +82,17 @@ const World = () => (
       }}
     />
     
+    <Sprite 
+      name="particle bucket"
+      source=""
+      src="https://media.giphy.com/media/5nmks3w7UDAeZkHlys/giphy.gif"
+      width={200}
+      position={{
+        top: '10vh',
+        right: '30vw'
+      }}
+    />
+    
   </div>
 );
 
