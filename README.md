@@ -6,4 +6,5 @@ cursors via [webfetti](https://web.archive.org/web/20120120140355/http://www.web
 
 #### TODO 
 - [x] add css, even static is fine
+- [ ] DISABLE AUTOCOMPLETE
 - [ ] mobile :/
