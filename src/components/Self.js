@@ -107,6 +107,7 @@ class Self extends Component {
             <input
               type="text"
               autoFocus={true}
+              autocomplete="off"
               id="message"
               value={message}
               onChange={this.handleInput}
