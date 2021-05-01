@@ -19,7 +19,7 @@ import initialState from 'state/initial';
 import configureStore from 'state/store';
 import { setPosition, clearIdentity } from 'state/actionCreators';
 
-import 'style.css';
+import './style.css';
 
 
 const MOUSE_DEBOUNCE = 10;

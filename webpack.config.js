@@ -58,7 +58,9 @@ const config = {
   },
   resolve: {
     alias: {
-      components: path.join(paths.a)
+      components: path.join(paths.appSrc, 'components'),
+      server: path.join(paths.appSrc, 'server'),
+      state: path.join(paths.appSrc, 'state'),
     },
     extensions: ['.js', '.jsx', '.json'],
   },
