@@ -57,7 +57,9 @@ const config = {
     publicPath: '/',
   },
   resolve: {
-    modules: [paths.appSrc, paths.appNodeModules],
+    alias: {
+      components: path.join(paths.a)
+    },
     extensions: ['.js', '.jsx', '.json'],
   },
   module: {
