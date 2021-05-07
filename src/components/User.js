@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CURSORS } from 'consts';
-import { getPositionStyle } from 'utils';
+import { CURSORS } from './consts';
+import { getPositionStyle } from './utils';
 
 const User = ({
   username,
