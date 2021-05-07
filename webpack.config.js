@@ -61,6 +61,8 @@ const config = {
       components: path.join(paths.appSrc, 'components'),
       server: path.join(paths.appSrc, 'server'),
       state: path.join(paths.appSrc, 'state'),
+      consts: path.join(paths.appSrc, 'consts.js'),
+      utils: path.join(paths.appSrc, 'utils.js'),
     },
     extensions: ['.js', '.jsx', '.json'],
   },
