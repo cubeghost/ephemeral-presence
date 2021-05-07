@@ -20,4 +20,7 @@ export const CURSORS = {
   'shihtzu': { file: asset('shihtzu.gif'), id: 'shihtzu' },
   'trex-sparkle': { file: asset('trex-sparkle.gif'), id: 'trex-sparkle' },
   'dolphin': { file: asset('dolphin.gif'), id: 'dolphin' },
+  'fish-1': { file: asset('fish1.gif'), id: 'fish-1' },
+  'fish-2': { file: asset('fish2.gif'), id: 'fish-2' },
+  'hummingbird': { file: asset('hummingbird.gif'), id: 'hummingbird' },
 };
