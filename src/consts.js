@@ -19,4 +19,5 @@ export const CURSORS = {
   'persian-sparkle': { file: asset('persian-sparkle.gif'), id: 'persian-sparkle' },
   'shihtzu': { file: asset('shihtzu.gif'), id: 'shihtzu' },
   'trex-sparkle': { file: asset('trex-sparkle.gif'), id: 'trex-sparkle' },
+  'dolphin': { file: asset('dolphin.gif'), id: 'dolphin' },
 };
