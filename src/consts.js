@@ -11,6 +11,7 @@ export const CURSORS = {
   'deer': { file: asset('deer.gif'), id: 'deer' },
   'dinosaur': { file: asset('dino.gif'), id: 'dinosaur' },
   'dog-pant': { file: asset('dog-pant.gif'), id: 'dog-pant' },
+  'chowchow': { file: asset('chowchow.gif'), id: 'chowchow' },
   'frog': { file: asset('frog.gif'), id: 'frog' },
   'lizard': { file: asset('lizard.gif'), id: 'lizard' },
   'orange-cat': { file: asset('orange-cat.png'), id: 'orange-cat' },
@@ -23,5 +24,4 @@ export const CURSORS = {
   'fish-1': { file: asset('fish1.gif'), id: 'fish-1' },
   'fish-2': { file: asset('fish2.gif'), id: 'fish-2' },
   'hummingbird': { file: asset('hummingbird.gif'), id: 'hummingbird' },
-  'chowchow': { file: asset('chowchow.gif'), id: 'chowchow' },
 };

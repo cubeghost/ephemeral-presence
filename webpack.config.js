@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const findCacheDir = require('find-cache-dir');
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -69,13 +70,6 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        enforce: 'pre',
-        exclude: [/node_modules/],
-        include: [paths.appSrc],
-        use: 'eslint-loader',
-      },
-      {
         test: /\.jsx?$/,
         include: [paths.appSrc],
         use: 'babel-loader',
@@ -97,6 +91,7 @@ const config = {
     concatenateModules: true,
   },
   plugins: [
+    new EslintWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
