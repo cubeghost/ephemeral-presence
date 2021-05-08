@@ -2,7 +2,6 @@
   "install": {
     "include": [
       "^package\\.json$",
-      "^\\.env$",
       "^webpack\\.config\\.js$"
     ]
   },
