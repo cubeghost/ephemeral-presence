@@ -1,8 +1,7 @@
 {
   "install": {
     "include": [
-      "^package\\.json$",
-      "^webpack\\.config\\.js$"
+      "^package\\.json$"
     ]
   },
   "restart": {
@@ -10,7 +9,8 @@
       "build\\/.*"
     ],
     "include": [
-      "src\\/server\\/.*"    
+      "src\\/server\\/.*",
+      "^webpack\\.config\\.js$"
     ]
   },
   "throttle": 500
