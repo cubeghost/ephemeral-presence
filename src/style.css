@@ -149,6 +149,7 @@ form.inline input {
 
 .cursor-picker {
   margin-bottom: 0.5rem;
+  max-width: calc(36px * 12);
 }
 .cursor-option {
   display: inline-block;
