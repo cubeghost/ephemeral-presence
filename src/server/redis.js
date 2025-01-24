@@ -1,4 +1,4 @@
-const redis = require('redis');
+const redis = require('ioredis');
 const promisifyAll = require('util-promisifyall');
 const serialize = require('serialize-javascript');
 const debug = require('debug')('presence:redis');
