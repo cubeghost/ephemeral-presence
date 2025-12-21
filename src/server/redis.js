@@ -1,9 +1,10 @@
-const Redis = require('ioredis');
-const promisifyAll = require('util-promisifyall');
-const serialize = require('serialize-javascript');
-const debug = require('debug')('presence:redis');
-const { promisify } = require('util');
+import Redis from 'ioredis';
+import promisifyAll from 'util-promisifyall';
+import serialize from 'serialize-javascript';
+import debugModule from 'debug';
+import { promisify } from 'util';
 
+const debug = debugModule('presence:redis');
 // promisifyAll(redis.RedisClient.prototype);
 // promisifyAll(redis.Multi.prototype);
 

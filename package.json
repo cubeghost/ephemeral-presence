@@ -6,13 +6,13 @@
   "engines": {
     "node": "20.x"
   },
+  "type": "module",
   "scripts": {
-    "watch:client": "webpack --watch",
-    "watch:server": "nodemon --watch src/server/index.js --watch src/server/redis.js --watch src/server/filter.js --watch src/state/actionTypes.js --exec babel-node src/server/index.js",
-    "build:client": "webpack",
-    "build:server": "babel src/server/*.js -d build/server && babel src/state/actionTypes.js -d build/state",
+    "watch:client": "vite",
+    "watch:server": "nodemon --watch 'src/server/*' --watch src/state/actionTypes.js --exec node src/server/index.js",
+    "build:client": "vite build",
+    "build:server": "",
     "build": "npm-run-all build:*",
-    "prestart": "npm run watch:client &",
     "start": "npm run build:server && node build/server/index.js"
   },
   "repository": {
@@ -35,7 +35,7 @@
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "ioredis": "^5.4.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
@@ -58,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.5.0",
+    "nodemon": "^3.1.11",
     "vite": "^7.3.0"
   }
 }

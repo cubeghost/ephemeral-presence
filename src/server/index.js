@@ -1,19 +1,22 @@
-require('dotenv').config({ debug: true });
+import dotenv from 'dotenv';
+dotenv.config({ debug: true });
 
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-const { difference } = require('lodash');
-const debugModule = require('debug');
+import path from 'path';
+import express from 'express';
+import http from 'http';
+import bodyParser from 'body-parser';
+import difference from 'lodash/difference.js';
+import {Server} from 'socket.io';
+import debugModule from 'debug';
 
-const { MessageClient, UserClient } = require('./redis');
-const { makeFilter } = require('./filter');
-const actionTypes = require('../state/actionTypes');
+import { MessageClient, UserClient } from './redis.js';
+import { makeFilter } from './filter.js';
+import * as actionTypes from '../state/actionTypes.js';
 
 const app = express();
 /* eslint-disable new-cap */
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const server = http.Server(app);
+const io = new Server(server);
 
 const buildDir = path.resolve('build');
 
