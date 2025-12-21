@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { get } from 'lodash';
 import { flow, isEmpty, trim } from 'lodash/fp';
 
-import { sendMessage, setTyping } from 'state/actionCreators';
+import { sendMessage, setTyping } from '../state/actionCreators';
 
-import { CURSORS } from 'consts';
-import { getPositionStyle } from 'utils';
+import { CURSORS } from '../consts';
+import { getPositionStyle } from '../utils';
 
 const isStringEmpty = flow(trim, isEmpty);
 

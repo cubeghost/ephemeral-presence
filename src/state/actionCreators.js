@@ -1,6 +1,6 @@
 import { flow, isEmpty, trim } from 'lodash/fp';
 
-import * as actionTypes from 'state/actionTypes';
+import * as actionTypes from './actionTypes';
 
 const isStringEmpty = flow(trim, isEmpty);
 

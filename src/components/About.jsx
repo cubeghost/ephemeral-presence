@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import autobind from 'class-autobind';
 
-import Link from 'components/Link';
+import Link from './Link';
 
 class About extends Component {
 

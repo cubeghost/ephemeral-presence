@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { map } from 'lodash';
 import { connect } from 'react-redux';
 
-import { setCursor } from 'state/actionCreators';
-import { CURSORS } from 'consts';
+import { setCursor } from '../state/actionCreators';
+import { CURSORS } from '../consts';
 
 const CursorOption = ({ file, id, isSelected, dispatchSetCursor }) => (
   <label 

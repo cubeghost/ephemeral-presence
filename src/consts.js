@@ -1,27 +1,37 @@
-// TODO this could be a webpack loader 👀
-// esp since i can't do the same for the background image in style.css
-function asset(filename) {
-  return `https://cdn.glitch.com/${process.env.PROJECT_ID}%2F${filename}`;
-}
+const assets = import.meta.glob('./assets/*.{gif,png}', {
+  eager: true,
+  query: '?url',
+  import: 'default'
+});
+const assetKeys = Object.fromEntries(Object.keys(assets).map(key => ([key.replace("./assets/", "").replace(/\.\D+$/, ""), key])))
 
-export const CURSORS = {
-  'black-cat': { file: asset('black-cat.gif'), id: 'black-cat' },
-  'brown-cat': { file: asset('brown-cat.png'), id: 'brown-cat' },
-  'cat-sleepy': { file: asset('cat-sleepy.gif'), id: 'cat-sleepy' },
-  'deer': { file: asset('deer.gif'), id: 'deer' },
-  'dinosaur': { file: asset('dino.gif'), id: 'dinosaur' },
-  'dog-pant': { file: asset('dog-pant.gif'), id: 'dog-pant' },
-  'chowchow': { file: asset('chowchow.gif'), id: 'chowchow' },
-  'frog': { file: asset('frog.gif'), id: 'frog' },
-  'lizard': { file: asset('lizard.gif'), id: 'lizard' },
-  'orange-cat': { file: asset('orange-cat.png'), id: 'orange-cat' },
-  'peacock': { file: asset('peacock.gif'), id: 'peacock' },
-  'penguin': { file: asset('penguin.gif'), id: 'penguin' },
-  'persian-sparkle': { file: asset('persian-sparkle.gif'), id: 'persian-sparkle' },
-  'shihtzu': { file: asset('shihtzu.gif'), id: 'shihtzu' },
-  'trex-sparkle': { file: asset('trex-sparkle.gif'), id: 'trex-sparkle' },
-  'dolphin': { file: asset('dolphin.gif'), id: 'dolphin' },
-  'fish-1': { file: asset('fish1.gif'), id: 'fish-1' },
-  'fish-2': { file: asset('fish2.gif'), id: 'fish-2' },
-  'hummingbird': { file: asset('hummingbird.gif'), id: 'hummingbird' },
-};
+const cursorIds = [
+  'black-cat',
+  'brown-cat',
+  'cat-sleepy',
+  'deer',
+  'dinosaur',
+  'dog-pant',
+  'chowchow',
+  'frog',
+  'lizard',
+  'orange-cat',
+  'peacock',
+  'penguin',
+  'persian-sparkle',
+  'shihtzu',
+  'trex-sparkle',
+  'dolphin',
+  'fish-1',
+  'fish-2',
+  'hummingbird',
+];
+
+export const CURSORS = Object.fromEntries(cursorIds.map((id => (
+  [id, {
+    id,
+    file: assets[assetKeys[id]]
+  }]
+))));
+
+console.log(CURSORS)

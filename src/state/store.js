@@ -4,9 +4,9 @@ import thunk from 'redux-thunk';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { SERVER_ACTION_PREFIX } from 'state/actionTypes';
-import initialState from 'state/initial';
-import reducers from 'state/reducers';
+import { SERVER_ACTION_PREFIX } from './actionTypes';
+import initialState from './initial';
+import reducers from './reducers';
 
 const ENABLE_REDUX_DEVTOOLS =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
