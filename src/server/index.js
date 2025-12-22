@@ -24,7 +24,7 @@ const io = new Server(server, IS_DEVELOPMENT ? {
 } : {});
 
 if (!IS_DEVELOPMENT) {
-  const buildDir = path.resolve('build');
+  const buildDir = path.resolve('dist');
 
   app.use(express.static(buildDir));
   // app.use(bodyParser.json());

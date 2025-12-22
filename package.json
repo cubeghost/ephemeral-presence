@@ -10,10 +10,8 @@
   "scripts": {
     "watch:client": "vite",
     "watch:server": "nodemon --watch 'src/server/*' --watch src/state/actionTypes.js --exec node src/server/index.js",
-    "build:client": "vite build",
-    "build:server": "",
-    "build": "npm-run-all build:*",
-    "start": "npm run build:server && node build/server/index.js"
+    "build": "vite build",
+    "start": "node src/server/index.js"
   },
   "repository": {
     "type": "git",
