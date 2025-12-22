@@ -10,7 +10,7 @@ import reducers from './reducers';
 
 const ENABLE_REDUX_DEVTOOLS =
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-  process.env.NODE_ENV !== 'production';
+  import.meta.env.MODE !== 'production';
 const composeEnhancers = ENABLE_REDUX_DEVTOOLS
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   : compose;

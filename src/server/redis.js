@@ -1,15 +1,7 @@
 import Redis from 'ioredis';
-import promisifyAll from 'util-promisifyall';
 import serialize from 'serialize-javascript';
-import debugModule from 'debug';
-import { promisify } from 'util';
 
-const debug = debugModule('presence:redis');
-// promisifyAll(redis.RedisClient.prototype);
-// promisifyAll(redis.Multi.prototype);
-
-const USER_EXPIRY = 60 * 60 * 24;
-const MESSAGE_EXPIRY = 60 * 60;
+// const debug = createDebug('presence:redis');
 
 const redisClient = new Redis(process.env.REDIS_URL);
 
@@ -58,6 +50,7 @@ export class UserClient {
     cursor = response[0];
     accumulator = accumulator.concat(response[1]);
     
+    // eslint-disable-next-line eqeqeq
     if (cursor == '0') {
       if (accumulator.length > 0) {
         return await this.client.mget(accumulator);
@@ -71,7 +64,7 @@ export class UserClient {
   
   async list() {
     const list = await this.scan();
-    return list.map(JSON.parse)
+    return list.map(JSON.parse);
   }
   
   async set(user) {

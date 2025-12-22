@@ -39,14 +39,15 @@ class About extends Component {
               it's like a liminal space but in cyber...space
             </p>
             <h3>how</h3>
-            <p>websockets, <Link href="https://glitch.com">glitch.com</Link>, redis</p>
+            <p>websockets, <s><Link href="https://glitch.com">glitch.com</Link></s> RIP, redis</p>
+            <p><Link href="https://github.com/cubeghost/ephemeral-presence">source on github</Link></p>
             <h3>credits</h3>
             <ul>
               <li>
                 cursors are from <Link href="https://web.archive.org/web/20120120140355/http://www.webfetti.com:80/MySpace/Cursors/Animals.jhtml?pageNumber=3">webfetti</Link> (h/t internet archive)
               </li>
               <li>
-                see <Link href="https://glitch.com/edit/#!/ephemeral-presence?path=src/components/World.js">components/World.js</Link> for
+                see <Link href="https://github.com/cubeghost/ephemeral-presence/blob/main/src/components/World.jsx">components/World.jsx</Link> for
                 gif sources
               </li>
             </ul>

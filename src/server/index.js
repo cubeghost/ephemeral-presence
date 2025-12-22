@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config({ debug: true });
+import 'dotenv/config.js';
 
 import path from 'path';
 import express from 'express';
@@ -7,33 +6,43 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import difference from 'lodash/difference.js';
 import {Server} from 'socket.io';
-import debugModule from 'debug';
+import createDebug from 'debug';
 
 import { MessageClient, UserClient } from './redis.js';
 import { makeFilter } from './filter.js';
 import * as actionTypes from '../state/actionTypes.js';
 
+const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+
 const app = express();
-/* eslint-disable new-cap */
+// eslint-disable-next-line new-cap
 const server = http.Server(app);
-const io = new Server(server);
+const io = new Server(server, IS_DEVELOPMENT ? {
+  cors: {
+    origin: /^http:\/\/localhost\:/
+  }
+} : {});
 
-const buildDir = path.resolve('build');
+if (!IS_DEVELOPMENT) {
+  const buildDir = path.resolve('build');
 
-app.use(express.static(buildDir));
+  app.use(express.static(buildDir));
+  // app.use(bodyParser.json());
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(buildDir, '../index.html'));
+  });
+}
+
 app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(buildDir, '../index.html'));
-});
 
 const ACTION = 'action';
 
 const userClient = new UserClient();
 const messageClient = new MessageClient();
 
-io.on('connection', async socket => {
-  const debug = debugModule('presence:user');
+io.on('connection', async (socket) => {
+  const debug = createDebug('presence:user');
 
   debug(`a user connected ${socket.id}`);
 
@@ -162,7 +171,7 @@ io.on('connection', async socket => {
 });
 
 setInterval(async () => {
-  const debug = debugModule('presence:socket');
+  const debug = createDebug('presence:socket');
   
   const currentSockets = Object.keys(io.sockets.sockets);
   const users = await userClient.list();
@@ -183,7 +192,7 @@ setInterval(async () => {
 }, 1000 * 20);
 
 server.listen(process.env.PORT, () => {
-  const debug = debugModule('presence:server');
+  const debug = createDebug('presence:server');
   debug(`http://localhost:${process.env.PORT}/`);
 });
 

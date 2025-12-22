@@ -3,7 +3,9 @@ const assets = import.meta.glob('./assets/*.{gif,png}', {
   query: '?url',
   import: 'default'
 });
-const assetKeys = Object.fromEntries(Object.keys(assets).map(key => ([key.replace("./assets/", "").replace(/\.\D+$/, ""), key])))
+const assetKeys = Object.fromEntries(Object.keys(assets).map(key => (
+  [key.replace(/\.\/assets\/([^\.]+)\.\D+/, '$1'), key]
+)));
 
 const cursorIds = [
   'black-cat',
@@ -33,5 +35,3 @@ export const CURSORS = Object.fromEntries(cursorIds.map((id => (
     file: assets[assetKeys[id]]
   }]
 ))));
-
-console.log(CURSORS)
